@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rufruf pre mačky – analýza SK/CZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: jeden stĺpec na čítanie (~72ch), široké tabuľky v scroll kontajneroch, sticky obsah vľavo na desktope */
+  --bg:#f5f6f8; --panel:#ffffff; --ink:#1a2130; --muted:#5a6375; --line:#dce0e7; --accent:#b7790a; --accent-soft:#fbf1dc;
+  --good:#1f7a4d; --warn:#a45a00; --bad:#b3261e; --info:#2b5fb3; --hyp:#6b46c1;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11141a; --panel:#181c24; --ink:#e7e9ee; --muted:#9ba3b3; --line:#2a303c; --accent:#f0b440; --accent-soft:#2b2414;
+    --good:#4cc38a; --warn:#f0a050; --bad:#ff7b72; --info:#7aa7ff; --hyp:#b49cff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11141a; --panel:#181c24; --ink:#e7e9ee; --muted:#9ba3b3; --line:#2a303c; --accent:#f0b440; --accent-soft:#2b2414;
+  --good:#4cc38a; --warn:#f0a050; --bad:#ff7b72; --info:#7aa7ff; --hyp:#b49cff; color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6}
+a{color:var(--info)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;max-width:1180px;margin:0 auto;padding:32px 20px 80px}
+nav.toc{position:sticky;top:20px;align-self:start;font-size:14px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:3px 8px;border-left:2px solid var(--line)}
+nav.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+main{min-width:0}
+header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:28px}
+.eyebrow{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2}
+h1{font-size:38px;margin:6px 0 10px}
+h2{font-size:27px;margin:56px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:19px;margin:28px 0 8px}
+p,li{max-width:74ch}
+.lead{font-size:18px;color:var(--ink)}
+.muted{color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 6px;border-radius:4px;vertical-align:1px;margin-right:4px;border:1px solid currentColor}
+.F{color:var(--good)} .O{color:var(--info)} .H{color:var(--hyp)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--muted);margin-top:10px}
+.verdict{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:20px 22px;margin:20px 0}
+.verdict h3{margin-top:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi b{display:block;font-family:var(--display);font-size:24px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;background:var(--accent-soft);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.callout{background:var(--accent-soft);border-radius:8px;padding:14px 16px;margin:16px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.card h4{margin:0 0 6px;font-family:var(--display);font-size:16px}
+.card p{margin:4px 0;font-size:14.5px}
+.score{display:grid;grid-template-columns:200px 1fr 40px;gap:10px;align-items:center;font-size:15px;margin:6px 0}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.score b{font-variant-numeric:tabular-nums;text-align:right}
+ol.src{font-size:14px;padding-left:20px}
+ol.src li{margin:3px 0;max-width:none;word-break:break-word}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}nav.toc{position:static}nav.toc ol{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}}
+@media (max-width:480px){h1{font-size:30px}.score{grid-template-columns:130px 1fr 32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Obsah">
+<ol>
+<li><a href="#verdikt">0. Verdikt</a></li>
+<li><a href="#rufruf">1. Analýza Rufruf</a></li>
+<li><a href="#trh">2. Trh SK/CZ</a></li>
+<li><a href="#konkurencia">3. Konkurencia</a></li>
+<li><a href="#zahranicie">4. Zahraničné inšpirácie</a></li>
+<li><a href="#produkty">5. Produktová stratégia</a></li>
+<li><a href="#financie">6. Finančný model</a></li>
+<li><a href="#marketing">7. Marketing</a></li>
+<li><a href="#rizika">8. Riziká</a></li>
+<li><a href="#zhodnotenie">9. Investičné zhodnotenie</a></li>
+<li><a href="#zdroje">10. Zdroje</a></li>
+</ol>
+</nav>
+<main>
+<header class="top">
+<div class="eyebrow">Business opportunity analysis · 13. 11. 2026</div>
+<h1>„Rufruf pre mačky“ na slovenskom a českom trhu</h1>
+<p class="lead">Či sa oplatí postaviť špecializovanú DTC značku a e-shop výhradne pre mačky podľa modelu Rufruf, aký veľký je trh, kto už na ňom je a za akých podmienok by čísla vychádzali.</p>
+<div class="legend"><span><span class="tag F">F</span>fakt so zdrojom</span><span><span class="tag O">O</span>odhad s metodikou</span><span><span class="tag H">H</span>hypotéza / úsudok</span></div>
+</header>
+
+<section id="verdikt">
+<h2>0. Verdikt v skratke</h2>
+<div class="verdict">
+<h3>Podmienečné áno, ale nie ako kópia Rufrufu a len cez lacný test s jasnými KPI bránami.</h3>
+<p>Na SK/CZ trhu som nenašiel značku výhradne pre mačky, ktorá by mala DTC branding, edukáciu a komunitu na úrovni Rufrufu. Medzera je reálna, no nie je veľká: Slovensko je výrazne „psia“ krajina (asi 2,7 psa na jednu mačku), Česko je o niečo vyváženejšie (asi 1,6 psa na mačku). Najsilnejším argumentom pre mačky je, že v Európe tvorí krmivo pre mačky väčšiu časť hodnoty trhu než krmivo pre psov a mačkári míňajú na jedno zviera porovnateľne alebo viac.</p>
+<p>Model funguje iba vtedy, ak sa marža neopiera o predaj cudzích krmív. Distribúcia mokrého krmiva dáva tenkú maržu a vysoké náklady na dopravu. Jadrom musia byť <b>vlastné funkčné produkty s vysokou maržou</b> (toppery pre vyberavé mačky, lízacie funkčné pamlsky, doplnky na močové cesty, trávenie a srsť) a kurátorovaný výber mokrého krmiva ako „frekvenčný“ dôvod objednávať.</p>
+</div>
+<div class="kpis">
+<div class="kpi"><b>~1,93 mil.</b><span>mačiek v CZ+SK (FEDIAF, 2024) <span class="tag F">F</span></span></div>
+<div class="kpi"><b>€200–450 mil.</b><span>ročný trh krmív a spotrebného tovaru pre mačky CZ+SK <span class="tag O">O</span></span></div>
+<div class="kpi"><b>€20–50 mil.</b><span>prémiový online segment (SAM) <span class="tag O">O</span></span></div>
+<div class="kpi"><b>€0,25 mil.</b><span>tržby v 1. roku, realistický scenár <span class="tag O">O</span></span></div>
+<div class="kpi"><b>~€145 tis.</b><span>potrebný kapitál do bodu zvratu (realisticky, mesiac 19) <span class="tag O">O</span></span></div>
+<div class="kpi"><b>5,5 / 10</b><span>celková atraktivita investície <span class="tag H">H</span></span></div>
+</div>
+<p><b>Odporúčanie:</b> 3-mesačná validačná fáza za €35–45 tis. (Shopify e-shop pre CZ+SK z jedného skladu, 3 vlastné hero produkty v malých sériách, kurátorovaný výber mokrého krmiva). Ďalej pokračovať iba pri splnení brán: blended CAC ≤ €25, AOV ≥ €38, 60-dňový opakovaný nákup ≥ 25 %, hrubá marža ≥ 45 %. Ak to nevyjde, skončiť so stratou okolo €40 tis. namiesto €140 tis.</p>
+</section>
+
+<section id="rufruf">
+<h2>1. Analýza Rufruf – čo presne napodobniť</h2>
+<p class="muted">Poznámka k metodike: rufruf.sk sa mi nepodarilo načítať priamo, takže analýza vychádza z rufruf.cz (rovnaký obchod, prepínač CZ/SK), z Heureky, zo Zboží.cz a z recenzných stránok. Reklamné kreatívy v Meta Ad Library a obsah sociálnych sietí som neoveroval, preto sú body o reklame označené ako hypotézy.</p>
+
+<h3>Čo Rufruf je</h3>
+<ul>
+<li><span class="tag F">F</span> Česko-slovenská značka vlastných psích krmív s vlastným e-shopom (CZ/SK prepínač). Kategórie: granule od 289 Kč, konzervy od 84 Kč, pamlsky od 129 Kč, vitamíny 499 Kč za 100 tabliet, „Magický prášek“ 299 Kč za 100 g.</li>
+<li><span class="tag F">F</span> Ceny granúl podľa Heureky: rad Smart &amp; Tasty 12 kg za 1 399 Kč (~117 Kč/kg), Fresh &amp; Tasty 12 kg za 1 999 Kč (~167 Kč/kg). Je to vyššia stredná až prémiová cena, nie luxus.</li>
+<li><span class="tag F">F</span> Hlavná správa: „Konečne granule, ktoré váš pes zje aj bez kapsičky.“ Rieši konkrétny problém (vyberavosť), až potom zdravie a „psí well-being“. Medzi tvrdeniami sú para pri max. 90 °C, probiotiká a byliny, bez pšenice, sóje a kukurice, výsledky do 8 týždňov a „viac ako 40 000 psov“.</li>
+<li><span class="tag F">F</span> Sociálny dôkaz: 4,9/5 na Heureke, recenzie priamo pri produktoch s čiastkovými hodnoteniami (chuť, „bobek“, cena a kvalita). Magický prášok má na rufruf.cz stovky overených recenzií a je jedným z najrecenzovanejších produktov.</li>
+<li><span class="tag F">F</span> Tvrdenie o retencii: „8 z 10 zákazníkov objednáva pravidelne“ (vlastné tvrdenie, neoverené).</li>
+<li><span class="tag F">F</span> Omnichannel: veľkoobchod, mapa predajcov, chovateľský a kynologický program, affiliate cez eHUB, odporúčanie priateľa, vernostný program, Run Club. Vitamíny predávajú aj iné e-shopy (DOGG, Zoozverimex, HappyZoo) za rovnakú cenu 499 Kč, teda s disciplinovanou cenovou politikou.</li>
+<li><span class="tag F">F</span> Na hlavnej stránke chýba viditeľné predplatné, kvíz a kalkulačka kŕmenia. Retencia stojí na produkte, e-maile a vernostnom programe. V sezóne používajú gamifikáciu („Vianočný los v každej objednávke“).</li>
+</ul>
+
+<h3>Prečo model funguje (u psov)</h3>
+<div class="grid2">
+<div class="card"><h4>1. Ťažký opakovaný nákup s vlastnou maržou</h4><p>Granule sú vlastný produkt, kupujú sa každý mesiac a vo veľkom balení (6–12 kg), takže objednávka má vysokú hodnotu. Marža zostáva značke, nie distribútorovi. <span class="tag H">H</span></p></div>
+<div class="card"><h4>2. Vstupný produkt rieši bolesť</h4><p>Magický prášok za 299 Kč je lacný spôsob, ako vyskúšať značku na vlastnom psovi, a zároveň podporuje predaj granúl. <span class="tag H">H</span></p></div>
+<div class="card"><h4>3. Viditeľná komunita psíčkarov</h4><p>Venčenie, výcvik, kynológia a beh vytvárajú prirodzené offline komunity a odporúčania. Run Club a kynologický program na to stavajú. <span class="tag H">H</span></p></div>
+<div class="card"><h4>4. Dôvera z recenzií</h4><p>Masa recenzií na Heureke a pri produktoch znižuje riziko prechodu na nové krmivo. <span class="tag F">F</span>/<span class="tag H">H</span></p></div>
+</div>
+
+<h3>Čo sa dá preniesť na mačky a čo treba zmeniť</h3>
+<div class="tbl"><table>
+<thead><tr><th>Prvok Rufruf</th><th>Prenos na mačky</th><th>Úprava</th></tr></thead>
+<tbody>
+<tr><td>Vlastné granule ako jadro</td><td>Čiastočne</td><td>Mačky jedia hlavne mokré krmivo: tvorí asi 60 % hodnoty trhu s krmivom pre mačky. Jadro treba presunúť na mokré krmivo a toppery. Vlastné mokré krmivo príde až v 2. fáze cez českého co-packera. <span class="tag F">F</span></td></tr>
+<tr><td>„Magický prášok“ pre vyberavcov</td><td>Áno, veľmi dobre</td><td>Vyberavosť je pri mačkách ešte silnejšia bolesť ako pri psoch. Topper z mrazom sušenej pečene alebo rýb je kandidát na hero produkt číslo 1. <span class="tag H">H</span></td></tr>
+<tr><td>Vitamíny (trávenie, srsť, kĺby)</td><td>Áno</td><td>Prioritou budú močové cesty a hydratácia, chlpové guľky, trávenie, srsť a seniorské kĺby. Mačky neznášajú tablety, preto formy pasta, prášok a lízacie pyré.</td></tr>
+<tr><td>Pamlsky ako výcvik</td><td>Slabo</td><td>Pamlsky tvoria pri mačkách asi 9 % hodnoty krmív, pri psoch 27 %. Pamlsok musí mať funkciu (hydratácia, podávanie liekov, väzba), nie výcvik. <span class="tag F">F</span></td></tr>
+<tr><td>Run Club, kynológia</td><td>Nie</td><td>Náhrada: chovatelia a výstavy mačiek, útulky a dočasné opatrovanie, mačacie kaviarne, online komunita indoor mačiek.</td></tr>
+<tr><td>Recenzie, sociálny dôkaz</td><td>Áno</td><td>Rovnaký mechanizmus. Pri mačkách funguje humor a „moja mačka to zjedla“ UGC.</td></tr>
+<tr><td>Omnichannel (B2B, affiliate)</td><td>Áno, neskôr</td><td>V prvom roku DTC. Retail až po dokázaní predajnosti.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="trh">
+<h2>2. Slovenský a český trh</h2>
+<h3>Veľkosť</h3>
+<div class="tbl"><table>
+<thead><tr><th>Ukazovateľ</th><th class="n">Česko</th><th class="n">Slovensko</th><th>Zdroj / typ</th></tr></thead>
+<tbody>
+<tr><td>Počet mačiek (2024)</td><td class="n">1 395 000</td><td class="n">535 000</td><td>FEDIAF 2026 <span class="tag F">F</span></td></tr>
+<tr><td>Počet psov (2024)</td><td class="n">2 229 000</td><td class="n">1 436 000</td><td>FEDIAF 2026 <span class="tag F">F</span></td></tr>
+<tr><td>Psy na 1 mačku</td><td class="n">1,6</td><td class="n">2,7</td><td>výpočet <span class="tag O">O</span></td></tr>
+<tr><td>Domácnosti (CZ: aj osoby) s mačkou</td><td class="n">22–29 %</td><td class="n">~20 %</td><td>Nielsen, NMS/Whiskas; Go4insight 2021 <span class="tag F">F</span></td></tr>
+<tr><td>Domácnosti s mačkou (abs.)</td><td class="n">~1,0 mil.</td><td class="n">~0,4 mil.</td><td>počet domácností × podiel <span class="tag O">O</span></td></tr>
+</tbody></table></div>
+
+<h3>Výdavky</h3>
+<ul>
+<li><span class="tag F">F</span> Ekonóm Lukáš Kovanda (CNN Prima) odhaduje, že Česi dávajú za psa zhruba 1 500 Kč a za mačku 750–800 Kč mesačne. Za psov a mačky spolu je to asi 60 mld. Kč ročne.</li>
+<li><span class="tag F">F</span> Super Zoo: zákazníci minú na potreby pre mačky asi 600 Kč a pre psov 700 Kč mesačne.</li>
+<li><span class="tag F">F</span> Nielsen (2018): priemerná ročná útrata za mačku 2 290 Kč, pre psa 1 140 Kč. Psov je v Česku takmer dvakrát toľko, no za mačky sa utráca viac.</li>
+<li><span class="tag F">F</span> Európa: krmivo pre mačky tvorí 50 % hodnoty trhu s krmivom, ale len 41 % objemu. Pre psov je to 46 % hodnoty a 58 % objemu. Kilogram mačacieho krmiva je teda drahší.</li>
+</ul>
+
+<h3>Odhad veľkosti trhu <span class="tag O">O</span></h3>
+<div class="callout">
+<p><b>Metóda A (zhora):</b> európska hodnota krmív pre mačky €29,4 mld. × 50 % / 110,9 mil. mačiek ≈ €133 na mačku a rok. Po úprave na cenovú hladinu CZ/SK (×0,55–0,65) vychádza €75–85. CZ: 1,395 mil. × €80 ≈ €112 mil. SK: 0,535 mil. × €75 ≈ €40 mil. <b>Krmivo spolu ≈ €150 mil.</b></p>
+<p><b>Metóda B (útrata):</b> 750–800 Kč mesačne na mačku podľa Kovandu ≈ €30 mesačne vrátane veterinára a príslušenstva. Ak na krmivo a spotrebný tovar pripadá 40–50 %, je to €145–180 na mačku a rok, teda <b>CZ+SK €280–350 mil.</b></p>
+<p><b>Záver:</b> krmivo a spotrebný tovar pre mačky v CZ+SK tvoria <b>€200–450 mil. ročne</b>. Prémiový a funkčný segment (25–35 %) predávaný online (30–40 %) dáva <b>SAM ≈ €20–50 mil.</b> Podiel 1–2 % zo SAM do 3. roka znamená €0,4–1 mil. tržieb. Na lokálnu značku je to dosť, na veľký biznis málo. Škálovanie si skôr či neskôr vyžiada PL, HU a AT.</p>
+<p class="muted">Pre porovnanie: ECDB odhadovala český online trh potrieb pre mačky na US$89 mil. (2024), čo je 38 % online pet trhu. Tento údaj je výrazne vyšší než moje odhady a metodika nie je verejná, preto ho beriem ako horný okraj.</p>
+</div>
+
+<h3>Trendy</h3>
+<ul>
+<li><span class="tag F">F</span> Český pet food trh prechádza prémiovizáciou. NielsenIQ v roku 2025 opisuje návrat k prémiovým produktom aj vo FMCG všeobecne.</li>
+<li><span class="tag F">F</span> V Česku silnie funkčná výživa (kĺby, trávenie, imunita, močové cesty) a „longevity“ projekty (Vetstor získal €500 tis. v pre-seed kole).</li>
+<li><span class="tag F">F</span> Česko je výrobná veľmoc pet food: VAFO (Brit, Carnilove) malo v roku 2024 tržby ~€605 mil., ďalej Dibaq/Fitmin, Partner in Pet Food (Shelma), Tekro (Eminent). Pre privátnu značku to znamená dostupných co-packerov blízko.</li>
+<li><span class="tag F">F</span> Pozor: podľa Forbes je český trh s krmivami v prepočte na obyvateľa jeden z najpreplnenejších na svete.</li>
+</ul>
+
+<h3>Správanie zákazníkov</h3>
+<div class="tbl"><table>
+<thead><tr><th>Otázka</th><th>Čo vieme</th><th>Typ</th></tr></thead>
+<tbody>
+<tr><td>Koľko míňajú?</td><td>€24–32 mesačne na mačku celkovo, z toho krmivo a spotrebný tovar zhruba polovica. Viacmačkové domácnosti zvyšujú košík.</td><td><span class="tag F">F</span>/<span class="tag O">O</span></td></tr>
+<tr><td>Platia za prémiu?</td><td>Áno, časť áno. Na Rohlíku 21–27 % zákazníkov Shelmy kupuje pravidelne a prémiové kapsičky Shelma sú tam medzi obľúbenými (tisíce zákazníkov ich majú v obľúbených).</td><td><span class="tag F">F</span></td></tr>
+<tr><td>Hlavné problémy</td><td>Vyberavosť, nízky príjem vody a močové cesty, chlpové guľky, citlivé trávenie, obezita kastrátov, zápach steliva, nuda indoor mačiek, starnutie (obličky, kĺby).</td><td><span class="tag H">H</span> (podporené sortimentom lekární a e-shopov)</td></tr>
+<tr><td>Kde nakupujú?</td><td>Supermarkety a diskonty (lacné kapsičky, privátne značky), veľké pet e-shopy (Zoohit, Spokojený pes, Super zoo, Alza, Rohlík), lekárne (Dr.Max, Lékárna.cz) na doplnky.</td><td><span class="tag F">F</span></td></tr>
+<tr><td>Recenzie a veterinári</td><td>Heureka je kľúčová (Rufruf 4,9/5). Pri doplnkoch dominujú „veterinárne“ značky (VetExpert, Alavis, Canvit) a lekárne, teda dôveru stavia odbornosť.</td><td><span class="tag F">F</span>/<span class="tag H">H</span></td></tr>
+<tr><td>Pravidelné objednávky</td><td>Ochota existuje pri krmive a stelive. Predplatné v CZ/SK nie je masovo rozšírené. Lepšie funguje „pripomenutie a 1-klik znovu objednať“ než tvrdé predplatné.</td><td><span class="tag H">H</span></td></tr>
+</tbody></table></div>
+
+<h3>Pes vs. mačka: rozdiely, ktoré menia biznis model</h3>
+<div class="tbl"><table>
+<thead><tr><th>Oblasť</th><th>Psy (Rufruf)</th><th>Mačky</th></tr></thead>
+<tbody>
+<tr><td>Hlavný formát krmiva</td><td>Granule (60 % objemu, 50 % hodnoty)</td><td>Mokré (61 % objemu, 60 % hodnoty) <span class="tag F">F</span></td></tr>
+<tr><td>Pamlsky v hodnote krmív</td><td>27 %</td><td>9 % <span class="tag F">F</span></td></tr>
+<tr><td>Typický košík</td><td>Jedno veľké vrece 6–12 kg, vysoká hodnota objednávky</td><td>Viac menších kusov (kapsičky po 85 g), viac kusov na balenie a vyššie náklady na pick and pack <span class="tag H">H</span></td></tr>
+<tr><td>Frekvencia</td><td>Vrece raz za 4–8 týždňov</td><td>Kapsičky sa minú rýchlo (zásoba na 2–4 týždne), stelivo každý mesiac <span class="tag H">H</span></td></tr>
+<tr><td>Lojalita</td><td>Pes zje skoro všetko, majiteľ vyberá</td><td>Mačka vyberá. Ak nové krmivo nezje, zákazník odchádza. Zmeniť krmivo je riziko, a preto je silná retencia, keď mačke chutí. <span class="tag H">H</span></td></tr>
+<tr><td>Komunita</td><td>Verejná (venčenie, výcvik)</td><td>Súkromná, online, humor a memy <span class="tag H">H</span></td></tr>
+<tr><td>Najvyššia marža a retencia</td><td>Vlastné granule, doplnky</td><td>Toppery, funkčné pamlsky, doplnky (marža). Mokré krmivo a stelivo (retencia). <span class="tag H">H</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="konkurencia">
+<h2>3. Konkurencia na SK/CZ trhu</h2>
+<div class="tbl"><table>
+<thead><tr><th>Hráč</th><th>Typ</th><th>Sortiment</th><th>Cena</th><th>Positioning a branding</th><th>Silné / slabé stránky</th></tr></thead>
+<tbody>
+<tr><td><b>Shelma</b> (Partner in Pet Food)<br><a href="https://www.rohlik.cz/1387400-shelma-bezobilne-dusene-filetky-masovy-vyber-pro-kocky-12-85-g">rohlik.cz</a></td><td>Výrobcova značka, takmer výhradne pre mačky</td><td>Bezobilné kapsičky (až 88 % živočíšnych zložiek), granule, vankúšiky Beauty, Immunity a Anti-hairball, tyčinky</td><td>Stredná až prémiová (12×85 g za 120–170 Kč)</td><td>Silný: postavy („Madmazel Čiči“, „Kocourek Ferdinand“), superpotraviny (spirulina, rakytník)</td><td>+ distribúcia (Rohlík, Alza), cena, funkčné pamlsky<br>− nie je DTC, nemá vlastnú komunitu ani edukáciu, predáva sa v retaile</td></tr>
+<tr><td><b>Brit Care Cat / Carnilove</b> (VAFO)</td><td>Výrobcove značky</td><td>Kompletné krmivo, snacky Superfruits, Calming, Raw Treat Urinary</td><td>Stredná až prémiová</td><td>Profesionálny, „kvalita z Česka“</td><td>+ funkčné snacky už v ponuke, export do 70 krajín<br>− generická komunikácia, psy aj mačky</td></tr>
+<tr><td><b>LOUIE</b></td><td>Lokálna značka (od 2023)</td><td>Psie krmivo, nově konzervy pre mačky 200/400 g</td><td>Prémiová</td><td>„Menej marketingu, viac obsahu“</td><td>Potvrdzuje, že lokálne psie značky začínajú s mačkami. Malý mačací rad.</td></tr>
+<tr><td><b>Spokojený pes</b><br><a href="https://www.spokojenypes.cz">spokojenypes.cz</a></td><td>Veľký pet e-shop CZ+SK</td><td>Všetko pre psy, mačky a ďalšie zvieratá</td><td>Široké pásmo</td><td>Komunita psíčkarov, ShopRoku Cena kvality</td><td>+ tržby 640 mil. Kč, logistika, ambícia rásť na Slovensku<br>− názov aj DNA sú „psie“</td></tr>
+<tr><td><b>Super zoo</b> (Plaček)</td><td>Retail + e-shop</td><td>Kompletný</td><td>Stredná</td><td>Najväčší predajca chovateľských potrieb v strednej Európe (~350 predajní)</td><td>+ dosah, omnichannel<br>− žiadna mačacia špecializácia</td></tr>
+<tr><td><b>Zoohit</b> (Zooplus)</td><td>Online gigant</td><td>8 000+ produktov, krmivá od 40+ výrobcov pre mačky</td><td>Nízka až stredná</td><td>Cena a výber</td><td>+ cena, sortiment (zoohit.sk ~US$13 mil.)<br>− žiadna značka ani emócia</td></tr>
+<tr><td><b>Rohlík / Alza</b></td><td>Generalisti</td><td>Krmivá vrátane privátnej značky PAUU</td><td>Nízka až stredná</td><td>Pohodlie</td><td>+ rýchlosť, pravidelný nákup<br>− nulová špecializácia</td></tr>
+<tr><td><b>Spokojená kočka</b><br><a href="https://www.spokojenakocka.cz/">spokojenakocka.cz</a></td><td>Špecializovaný e-shop iba pre mačky</td><td>Krmivá, toalety, fontánky, siete, darčeky</td><td>Stredná</td><td>Klasický multibrand e-shop</td><td>+ fokus na mačky<br>− žiadna vlastná značka ani brandová komunikácia <span class="tag H">H</span></td></tr>
+<tr><td><b>Kočkárium</b><br><a href="https://kockarium.cz/">kockarium.cz</a></td><td>Špecializovaný e-shop pre mačky</td><td>Široký katalóg značiek (Annelise, Fitmin, Bozita, Leonardo, Calibra…)</td><td>Stredná</td><td>„Pre všetky mačičky a ich ľudičky“</td><td>+ šírka sortimentu<br>− zastaraný e-shop a branding <span class="tag H">H</span></td></tr>
+<tr><td><b>Svět kočiček</b><br><a href="https://www.svetkocicek.cz/">svetkocicek.cz</a></td><td>„Mačací obchod“, udržateľný</td><td>Hračky, matatabi, šanta, potreby</td><td>Nízka až stredná</td><td>Nika, udržateľnosť</td><td>+ autentickosť<br>− malý, bez krmív a vlastných produktov <span class="tag H">H</span></td></tr>
+<tr><td><b>Lékárna.cz / Dr.Max</b></td><td>Lekárne</td><td>Doplnky pre mačky (VetExpert, Candioli, Zesty Paws, WePharm…)</td><td>Stredná až vysoká (pasty 379–585 Kč)</td><td>Odbornosť, zdravie</td><td>+ dôvera v doplnky<br>− žiadna mačacia značka. Zesty Paws je už v CZ cez lekáreň.</td></tr>
+<tr><td><b>Petcenter (Huhubamboo)</b></td><td>Retail + vlastná značka</td><td>Silikátové stelivo, sticks, doplnky</td><td>Stredná</td><td>Privátna značka</td><td>+ dôkaz, že vlastná značka v doplnkoch funguje<br>− psy aj mačky</td></tr>
+</tbody></table></div>
+<p class="muted">SK špecificky: hlavní online konkurenti zoohit.sk sú podľa Similarweb superzoo.sk, abc-zoo.sk, petcenter.sk a pet-market.sk. Slovenskú značku výhradne pre mačky s DTC brandingom som nenašiel.</p>
+
+<div class="verdict">
+<h3>Kľúčová otázka: existuje „Rufruf pre mačky“?</h3>
+<p><b>Nie.</b> Najbližšie je <b>Shelma</b>: najsilnejšia mačacia značka s charakterom, ale je to retailová značka veľkého výrobcu bez vlastného e-shopu, komunity a edukácie. Špecializované mačacie e-shopy (Spokojená kočka, Kočkárium) sú multibrandové katalógy so slabým brandingom. Veľkí hráči (Spokojený pes, Super zoo, Zoohit) mačky pokrývajú šírkou sortimentu, nie značkou.</p>
+<p><b>Je to medzera alebo nízky dopyt?</b> Oboje. Za medzerou hovorí vyššia útrata na mačku, väčší podiel hodnoty krmiva pre mačky v Európe, úspech mačacích DTC značiek v zahraničí a prémiovizácia. Za nízkym dopytom hovorí to, že na Slovensku je mačiek málo (535 tis.), mačkári sú menej „verejní“, veľa mačiek žije vonku na vidieku s lacným kŕmením a české krmivárske firmy (VAFO, PPF) by medzeru už dávno zaplnili, keby bola veľká. Môj úsudok <span class="tag H">H</span>: ide o <b>reálnu, ale úzku medzeru</b> v mestskom segmente bytových mačiek.</p>
+</div>
+</section>
+
+<section id="zahranicie">
+<h2>4. Zahraničné inšpirácie (16 značiek)</h2>
+<div class="tbl"><table>
+<thead><tr><th>Značka / web</th><th>Krajina</th><th>Portfólio</th><th>Cena</th><th>Marketing a odlíšenie</th><th>Čo preniesť na SK/CZ</th></tr></thead>
+<tbody>
+<tr><td><b>Smalls</b><br><a href="https://www.smalls.com">smalls.com</a></td><td>USA</td><td>Čerstvé a mrazom sušené krmivo len pre mačky, pamlsky Licks</td><td>Prémiová (~$3–4/mačka/deň)</td><td>Cat-only. Údajne $100 mil. tržieb za menej než 10 rokov. Humor „freaky little roommate“. Na začiatku diverzifikované médiá, Meta až pri škálovaní.</td><td>Tón komunikácie pre „mačacích ľudí“, lízacie pamlsky, kvíz pri onboardingu</td></tr>
+<tr><td><b>Untamed</b><br><a href="https://www.untamed.com">untamed.com</a></td><td>UK</td><td>Mokré krmivo z ľudských surovín, predplatné</td><td>Prémiová</td><td>80 000 mačiek mesačne, £10 mil. v Series B, B Corp, personalizácia cez dotazník</td><td>Dotazník → personalizovaný box, „vyberavá mačka“ ako hlavná bolesť</td></tr>
+<tr><td><b>KatKin</b><br><a href="https://www.katkin.com">katkin.com</a></td><td>UK</td><td>Čerstvé, mrazené krmivo</td><td>Prémiová</td><td>$50 mil. v Series C, ~2 % britského trhu s krmivom pre mačky, buduje veterinárne kliniky</td><td>Spojenie výživy s veterinárnou autoritou</td></tr>
+<tr><td><b>Cat Person</b> (Weruva)<br><a href="https://www.catperson.com">catperson.com</a></td><td>USA</td><td>Krmivo, pamlsky, hračky, štartovací box</td><td>Stredná až prémiová</td><td>DTC lifestyle, kúpil ho výrobca Weruva (2024)</td><td>Štartovací box a „všetko pre mačku“ ako lifestyle</td></tr>
+<tr><td><b>The Better Cat</b><br><a href="https://thebettercat.com">thebettercat.com</a></td><td>DE</td><td>„Preventívne“ krmivo (trávenie, obličky, hydratácia, pohyb)</td><td>Prémiová</td><td>Cieli na mileniálov a Gen Z, investor FoodLabs, „17 mil. mačiek vs. 10 mil. psov“</td><td>Funkčné pozície podľa najčastejších chorôb, najbližší model pre stredoeurópsky trh</td></tr>
+<tr><td><b>PrettyLitter</b><br><a href="https://www.prettylitter.com">prettylitter.com</a></td><td>USA</td><td>Stelivo, ktoré farbou ukazuje zdravie</td><td>$24–30/mesiac</td><td>Zo steliva urobili zdravotný monitoring a predplatné, prešli pod Mars</td><td>Preferovať „zdravotný“ uhol aj pri bežných produktoch</td></tr>
+<tr><td><b>Tuft + Paw</b><br><a href="https://www.tuftandpaw.com">tuftandpaw.com</a></td><td>CA/USA</td><td>Dizajnový nábytok, toalety, tofu stelivo</td><td>Vysoká</td><td>„West Elm mačacieho nábytku“, stelivo na webe len ako predplatné</td><td>Dizajn domova a stelivo na predplatné ako recurring k hardvéru</td></tr>
+<tr><td><b>Edgard &amp; Cooper</b><br><a href="https://www.edgardcooper.com">edgardcooper.com</a></td><td>BE</td><td>Krmivo pre psy a mačky (mačky od 2022)</td><td>Prémiová</td><td>B Corp, humor v texte, €100 mil.+ v retaile, kúpil General Mills</td><td>Hravý copywriting a hodnotová značka</td></tr>
+<tr><td><b>ZIWI Peak</b><br><a href="https://ziwipets.com">ziwipets.com</a></td><td>NZ</td><td>Vzduchom sušené krmivo (96 % mäsa)</td><td>Super prémiová</td><td>Pôvod, „raw bez mrazničky“</td><td>Kategória toppery a mono-proteín</td></tr>
+<tr><td><b>Musti (Smaak)</b><br><a href="https://www.mustigroup.com">mustigroup.com</a></td><td>FI/SE/NO</td><td>Vlastné značky vrátane mačacej rady Smaak</td><td>Stredná</td><td>„Own brands“ v štruktúre good, better, best, vlastná továreň</td><td>Ako postupne zvyšovať podiel vlastnej značky v multibrand e-shope</td></tr>
+<tr><td><b>Mjau</b> (PPF Nordics)</td><td>SE</td><td>Mačacie krmivo</td><td>Stredná</td><td>Mačacia značka rovnakej skupiny ako Shelma</td><td>Dôkaz, že PPF vie robiť mačacie značky, je to možný co-packer</td></tr>
+<tr><td><b>Purrform</b><br><a href="https://www.purrform.co.uk">purrform.co.uk</a></td><td>UK</td><td>Raw krmivo len pre mačky</td><td>Prémiová</td><td>Kúpila ho The Nutriment Company (2025) kvôli „species-specific expertise“</td><td>Exit logika: špecializácia na mačky je pre kupcov hodnota</td></tr>
+<tr><td><b>Made by Nacho</b></td><td>USA</td><td>Mačacie krmivo a mrazom sušené pamlsky</td><td>Stredná až prémiová</td><td>„Kulinárska“ značka, Walmart, kúpil ju I and love and you</td><td>Mrazom sušené pamlsky ako hero</td></tr>
+<tr><td><b>Zesty Paws</b><br><a href="https://www.zestypaws.com">zestypaws.com</a></td><td>USA</td><td>Doplnky pre psy a mačky (pasty na močové cesty, chlpové guľky)</td><td>Stredná až vysoká</td><td>Funkčné doplnky ako lifestyle. V CZ už cez Lékárna.cz (pasta 379 Kč).</td><td>Formát pasty pre mačky, cenová kotva</td></tr>
+<tr><td><b>INABA Churu</b></td><td>JP</td><td>Lízacie pyré</td><td>Stredná</td><td>Celosvetový hit vďaka rituálu kŕmenia z ruky. V CZ (Kaufland, lekárne) za 45–65 Kč za balenie 4–5 túb.</td><td>Lízacie pyré, ale s funkciou (hydratácia, chlpové guľky)</td></tr>
+<tr><td><b>VEGCAT</b> (Vegdog)</td><td>DE</td><td>Fermentované proteínové snacky</td><td>Prémiová</td><td>Psia DTC značka expanduje do mačiek</td><td>Rovnaká cesta ako LOUIE a Rufruf: psia značka môže kedykoľvek vstúpiť do mačiek. To je hrozba aj model.</td></tr>
+</tbody></table></div>
+<p class="callout"><b>Spoločný vzor:</b> úspešné mačacie DTC značky stavajú na (1) jednej bolesti (vyberavosť, hydratácia, zápach), (2) humore a „cat person“ identite, (3) kvíze alebo personalizácii, (4) neskoršom vstupe do retailu. Pre CZ/SK je kľúčový bod (4) opačne: tunajší výrobcovia sú silní v retaile, preto treba vyhrať práve v DTC skúsenosti.</p>
+</section>
+
+<section id="produkty">
+<h2>5. Produktová stratégia</h2>
+<h3>Hodnotenie kategórií (1–5, 5 = najlepšie) <span class="tag O">O</span></h3>
+<div class="tbl"><table>
+<thead><tr><th>Kategória</th><th class="n">Dopyt</th><th class="n">Marža</th><th class="n">Retencia</th><th class="n">Konkurencia*</th><th class="n">Diferenciácia</th><th class="n">Logistika</th><th class="n">Branding</th><th class="n">Spolu</th></tr></thead>
+<tbody>
+<tr><td><b>Toppery pre vyberavé mačky</b> (mrazom sušená pečeň/ryba)</td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">5</td><td class="n"><b>32</b></td></tr>
+<tr><td><b>Funkčné lízacie pamlsky</b> (hydratácia, chlpové guľky, upokojenie)</td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="n">3</td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n"><b>30</b></td></tr>
+<tr><td><b>Doplnky</b> (močové cesty, probiotiká, omega, kĺby seniorov)</td><td class="n">3</td><td class="n">5</td><td class="n">4</td><td class="n">3</td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n"><b>29</b></td></tr>
+<tr><td>Mrazom sušené mono-proteínové pamlsky</td><td class="n">3</td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="n">3</td><td class="n">5</td><td class="n">4</td><td class="n">25</td></tr>
+<tr><td>Hydratácia: fontánka + filtre</td><td class="n">3</td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="n">4</td><td class="n">3</td><td class="n">24</td></tr>
+<tr><td>Mokré krmivo (distribúcia)</td><td class="n">5</td><td class="n">2</td><td class="n">5</td><td class="n">1</td><td class="n">2</td><td class="n">2</td><td class="n">2</td><td class="n">19</td></tr>
+<tr><td>Mokré krmivo (privátna značka, 2. fáza)</td><td class="n">5</td><td class="n">3</td><td class="n">5</td><td class="n">2</td><td class="n">3</td><td class="n">2</td><td class="n">4</td><td class="n">24</td></tr>
+<tr><td>Granule</td><td class="n">4</td><td class="n">2</td><td class="n">5</td><td class="n">1</td><td class="n">2</td><td class="n">3</td><td class="n">3</td><td class="n">20</td></tr>
+<tr><td>Stelivo (tofu / bentonit)</td><td class="n">5</td><td class="n">2</td><td class="n">5</td><td class="n">2</td><td class="n">3</td><td class="n">1</td><td class="n">3</td><td class="n">21</td></tr>
+<tr><td>Dentálna hygiena</td><td class="n">2</td><td class="n">4</td><td class="n">3</td><td class="n">4</td><td class="n">3</td><td class="n">5</td><td class="n">3</td><td class="n">24</td></tr>
+<tr><td>Starostlivosť o srsť (kefy, deshedding)</td><td class="n">3</td><td class="n">4</td><td class="n">2</td><td class="n">3</td><td class="n">3</td><td class="n">5</td><td class="n">3</td><td class="n">23</td></tr>
+<tr><td>Enrichment / hračky</td><td class="n">3</td><td class="n">4</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">4</td><td class="n">4</td><td class="n">24</td></tr>
+<tr><td>Škrabadlá a dizajnový nábytok</td><td class="n">2</td><td class="n">3</td><td class="n">1</td><td class="n">3</td><td class="n">4</td><td class="n">1</td><td class="n">4</td><td class="n">18</td></tr>
+</tbody></table></div>
+<p class="muted">* Konkurencia: 5 = slabá konkurencia, 1 = veľmi silná.</p>
+
+<h3>5 kategórií na štart</h3>
+<ol>
+<li><b>Toppery a „chuťové posilňovače“</b>: priama analógia Magického prášku, vysoká marža, nízka hmotnosť.</li>
+<li><b>Funkčné lízacie pamlsky</b>: rituál ako Churu, ale s funkciou (hydratácia, chlpové guľky, podávanie liekov).</li>
+<li><b>Doplnky</b>: močové cesty a hydratácia, trávenie, srsť, seniori. Formy pasta, prášok, olej.</li>
+<li><b>Kurátorované prémiové mokré krmivo</b> (distribúcia 2–3 značiek, ktoré nie sú v supermarketoch) ako frekvenčný dôvod nákupu.</li>
+<li><b>Hydratácia</b>: fontánka (OEM alebo distribúcia) + filtre v pravidelnom doručovaní.</li>
+</ol>
+<p class="muted">Stelivo zámerne nie je na štarte. Je ťažké (10–15 kg), pri doprave zadarmo zjedá maržu a pri Packete naráža na váhové limity. Pridať ho až pri vlastnom fulfillmente alebo ako ľahké tofu stelivo.</p>
+
+<h3>Prvé portfólio: 10 produktov</h3>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Produkt</th><th>Model</th><th class="n">Cieľová cena</th><th class="n">Cieľová hrubá marža</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Topper pre vyberavé mačky</b>, mrazom sušená pečeň/losos, 50–80 g</td><td>Privátna značka</td><td class="n">€9–12</td><td class="n">60–70 %</td></tr>
+<tr><td>2</td><td><b>Lízacie pyré „Hydro“</b> (vysoký obsah vody), 12×15 g</td><td>Privátna značka</td><td class="n">€8–10</td><td class="n">55–65 %</td></tr>
+<tr><td>3</td><td>Lízacie pyré „Hairball“ (vláknina, slad)</td><td>Privátna značka</td><td class="n">€8–10</td><td class="n">55–65 %</td></tr>
+<tr><td>4</td><td>Doplnok na močové cesty (pasta alebo prášok)</td><td>Privátna značka</td><td class="n">€15–19</td><td class="n">65–75 %</td></tr>
+<tr><td>5</td><td>Probiotiká a trávenie (prášok do kapsičky)</td><td>Privátna značka</td><td class="n">€14–18</td><td class="n">65–75 %</td></tr>
+<tr><td>6</td><td>Olej srsť a koža (losos/krill, pumpička)</td><td>Privátna značka</td><td class="n">€12–16</td><td class="n">55–65 %</td></tr>
+<tr><td>7</td><td>Mrazom sušené mono-proteínové pamlsky (srdiečka, losos)</td><td>Privátna značka</td><td class="n">€6–9</td><td class="n">55–65 %</td></tr>
+<tr><td>8</td><td>Kurátorované mokré krmivo, 2–3 prémiové značky (mono-proteín, bez obilnín)</td><td>Distribúcia</td><td class="n">podľa značky</td><td class="n">20–30 %</td></tr>
+<tr><td>9</td><td>Fontánka + 3-mesačná sada filtrov</td><td>Distribúcia / OEM</td><td class="n">€35–45 + €12–15</td><td class="n">40–55 %</td></tr>
+<tr><td>10</td><td><b>„Degustačný box pre vyberavú mačku“</b> (6–8 kapsičiek rôznych textúr + topper + pyré)</td><td>Bundle</td><td class="n">€24–29</td><td class="n">35–45 %</td></tr>
+</tbody></table></div>
+<p class="muted">Ceny a marže sú cieľové odhady <span class="tag O">O</span> podľa cien porovnateľných produktov na CZ trhu (Rufruf prášok 299 Kč/100 g, Zesty Paws pasta 379 Kč, Churu 45–65 Kč/4×14 g, Shelma vankúšiky 30–40 Kč/60 g). Skutočné nákupné ceny treba overiť cenovými ponukami od co-packerov.</p>
+
+<h3>3 hero produkty</h3>
+<div class="grid2">
+<div class="card"><h4>1. Topper pre vyberavé mačky</h4><p>Bolesť číslo 1 pri mačkách. Dá sa okamžite vyskúšať, je ľahký a dá sa poslať aj vo vzorke. Analógia najrecenzovanejšieho produktu Rufrufu.</p></div>
+<div class="card"><h4>2. Lízacie pyré „Hydro“</h4><p>Mačky pijú málo a s tým súvisí väčšina močových problémov. Každodenný rituál vedie k opakovanému nákupu. Ponúka edukačný príbeh pre obsah.</p></div>
+<div class="card"><h4>3. Degustačný box</h4><p>Znižuje riziko prechodu („čo ak to nezje“). Je to akvizičný produkt a dáta o preferenciách pre personalizované pripomenutia.</p></div>
+</div>
+
+<h3>Privátna značka vs. distribúcia</h3>
+<div class="grid2">
+<div class="card"><h4>Privátna značka (od 1. dňa)</h4><p>Toppery, lízacie pyré, doplnky, mrazom sušené pamlsky. Malé MOQ pri českých, poľských a nemeckých co-packeroch. Tu vzniká marža aj značka.</p></div>
+<div class="card"><h4>Distribúcia</h4><p>Mokré krmivo (vyberať značky, ktoré nie sú v Rohlíku a Kauflande), fontánky, hračky, kefy. Slúži na frekvenciu a hodnotu košíka, nie na maržu.</p></div>
+</div>
+
+<h3>Funkčné pamlsky a doplnky: samostatné vyhodnotenie</h3>
+<ul>
+<li><b>Potenciál:</b> najvyšší z celého portfólia. Marža 55–75 %, nízka hmotnosť, prirodzený opakovaný nákup (30–60-dňové balenie), silný edukačný obsah. <span class="tag O">O</span></li>
+<li><b>Konkurencia:</b> roztrieštená. Vet značky (VetExpert, Alavis, Canvit, Candioli) majú dôveru, ale slabý lifestyle branding. Shelma a Brit majú funkčné snacky v retaile. Zesty Paws už je v CZ lekárňach. <span class="tag F">F</span></li>
+<li><b>Regulačné limity:</b> krmivo ani doplnkové krmivo nesmie tvrdiť, že lieči alebo predchádza chorobe. Tvrdenia typu „podpora močových ciest“ ako diétne krmivo majú v EÚ presné požiadavky (zoznam „particular nutritional purposes“). Copywriting treba nechať skontrolovať. <span class="tag H">H</span> (overiť s ÚKSÚP/ÚKZÚZ)</li>
+</ul>
+</section>
+
+<section id="financie">
+<h2>6. Obchodný model a ekonomika (12 mesiacov, CZ+SK)</h2>
+<p>Model je kohortový: noví zákazníci = rozpočet na reklamu / CAC × (1 + organický podiel). Opakované objednávky = každá kohorta s mesačnou pravdepodobnosťou nákupu r₀, ktorá klesá koeficientom útlmu. Všetky sumy sú bez DPH. <b>Mzda zakladateľa nie je zahrnutá.</b> Všetky vstupy sú odhady <span class="tag O">O</span>.</p>
+
+<h3>Predpoklady</h3>
+<div class="tbl"><table>
+<thead><tr><th>Predpoklad</th><th class="n">Konzervatívny</th><th class="n">Realistický</th><th class="n">Optimistický</th><th>Zdôvodnenie</th></tr></thead>
+<tbody>
+<tr><td>AOV (priemerná objednávka)</td><td class="n">€34</td><td class="n">€40</td><td class="n">€45</td><td>Prah dopravy zadarmo ~€39 / 990 Kč. Super Zoo: ~600 Kč mesačne na mačku.</td></tr>
+<tr><td>Hrubá marža (M1→M12)</td><td class="n">33→39 %</td><td class="n">36→47 %</td><td class="n">42→50 %</td><td>Rastie s podielom vlastnej značky (distribúcia 20–30 %, PL 55–75 %)</td></tr>
+<tr><td>Variabilné náklady na objednávku</td><td class="n">€6,5 + 2 %</td><td class="n">€6,0 + 2 %</td><td class="n">€5,5 + 2 %</td><td>Fulfillment, obal, dotácia dopravy (Packeta / Zásilkovna), platobná brána</td></tr>
+<tr><td>CAC platený</td><td class="n">€42</td><td class="n">€30</td><td class="n">€22</td><td>Meta CPM v CZ/SK nízke, konverzný pomer 1,5–2,5 %, CPC €0,4–0,7</td></tr>
+<tr><td>Organický podiel nových zákazníkov</td><td class="n">15 %</td><td class="n">25 %</td><td class="n">35 %</td><td>SEO, odporúčania, UGC, Heureka</td></tr>
+<tr><td>Mesačná pravdepodobnosť opakovaného nákupu r₀ / útlm</td><td class="n">17 % / 0,92</td><td class="n">23 % / 0,93</td><td class="n">30 % / 0,94</td><td>Spotrebný tovar, cyklus 4–8 týždňov</td></tr>
+<tr><td>Objednávky na zákazníka za 12 mes.</td><td class="n">2,3</td><td class="n">2,8</td><td class="n">3,5</td><td>výsledok modelu</td></tr>
+<tr><td>Reklama mesačne (M1→M12)</td><td class="n">€3,0→5,5 tis.</td><td class="n">€4,0→10 tis.</td><td class="n">€5,0→15 tis.</td><td>Meta, TikTok, Google, influenceri</td></tr>
+<tr><td>Fixné náklady mesačne</td><td class="n">€3,5→4,5 tis.</td><td class="n">€3,5→5,0 tis.</td><td class="n">€3,5→5,5 tis.</td><td>Brigádnik na zákaznícku podporu a sklad, UGC tvorcovia, nástroje, účtovníctvo</td></tr>
+<tr><td>Počiatočné náklady + zásoby</td><td class="n">€30 + 20 tis.</td><td class="n">€35 + 30 tis.</td><td class="n">€40 + 45 tis.</td><td>Viď rozpis nižšie</td></tr>
+</tbody></table></div>
+
+<h3>Výsledky</h3>
+<div class="tbl"><table>
+<thead><tr><th>Metrika</th><th class="n">Konzervatívny</th><th class="n">Realistický</th><th class="n">Optimistický</th></tr></thead>
+<tbody>
+<tr><td>Tržby 1. rok</td><td class="n">€78 tis.</td><td class="n">€249 tis.</td><td class="n">€665 tis.</td></tr>
+<tr><td>Mesačné tržby v M12</td><td class="n">€10,3 tis.</td><td class="n">€37,1 tis.</td><td class="n">€107,4 tis.</td></tr>
+<tr><td>Objednávky v M12</td><td class="n">302</td><td class="n">928</td><td class="n">2 387</td></tr>
+<tr><td>Získaní zákazníci za rok</td><td class="n">1 396</td><td class="n">3 354</td><td class="n">7 057</td></tr>
+<tr><td>Blended CAC</td><td class="n">€36,5</td><td class="n">€24,0</td><td class="n">€16,3</td></tr>
+<tr><td>Príspevok na objednávku (pri cieľovej marži)</td><td class="n">€6,1</td><td class="n">€12,0</td><td class="n">€16,1</td></tr>
+<tr><td>12-mes. LTV (tržby / príspevok)</td><td class="n">€77 / €14</td><td class="n">€112 / €34</td><td class="n">€156 / €56</td></tr>
+<tr><td>LTV / CAC (z príspevku)</td><td class="n neg">0,4</td><td class="n">1,4</td><td class="n pos">3,4</td></tr>
+<tr><td>EBITDA 1. rok</td><td class="n neg">−€90 tis.</td><td class="n neg">−€70 tis.</td><td class="n pos">+€55 tis.</td></tr>
+<tr><td>Bod zvratu (mesačná EBITDA ≥ 0)</td><td class="n neg">nedosiahne</td><td class="n">mesiac 19</td><td class="n pos">mesiac 6</td></tr>
+<tr><td>Potrebný kapitál (najnižší bod hotovosti)</td><td class="n neg">€140 tis.+ (stop-loss)</td><td class="n">~€145 tis. (M18)</td><td class="n">~€98 tis. (M5)</td></tr>
+</tbody></table></div>
+
+<h3>Mesačný priebeh: realistický scenár</h3>
+<div class="tbl"><table>
+<thead><tr><th>Mesiac</th><th class="n">1</th><th class="n">2</th><th class="n">3</th><th class="n">4</th><th class="n">5</th><th class="n">6</th><th class="n">7</th><th class="n">8</th><th class="n">9</th><th class="n">10</th><th class="n">11</th><th class="n">12</th></tr></thead>
+<tbody>
+<tr><td>Noví zákazníci</td><td class="n">167</td><td class="n">167</td><td class="n">208</td><td class="n">208</td><td class="n">250</td><td class="n">271</td><td class="n">292</td><td class="n">312</td><td class="n">333</td><td class="n">354</td><td class="n">375</td><td class="n">417</td></tr>
+<tr><td>Objednávky</td><td class="n">167</td><td class="n">205</td><td class="n">282</td><td class="n">325</td><td class="n">406</td><td class="n">474</td><td class="n">543</td><td class="n">613</td><td class="n">685</td><td class="n">758</td><td class="n">832</td><td class="n">928</td></tr>
+<tr><td>Tržby (€ tis.)</td><td class="n">6,7</td><td class="n">8,2</td><td class="n">11,3</td><td class="n">13,0</td><td class="n">16,3</td><td class="n">19,0</td><td class="n">21,7</td><td class="n">24,5</td><td class="n">27,4</td><td class="n">30,3</td><td class="n">33,3</td><td class="n">37,1</td></tr>
+<tr><td>EBITDA (€ tis.)</td><td class="n neg">−6,2</td><td class="n neg">−5,9</td><td class="n neg">−6,4</td><td class="n neg">−7,0</td><td class="n neg">−7,3</td><td class="n neg">−7,1</td><td class="n neg">−6,1</td><td class="n neg">−5,9</td><td class="n neg">−5,6</td><td class="n neg">−4,4</td><td class="n neg">−4,0</td><td class="n neg">−3,9</td></tr>
+<tr><td>Kumul. hotovosť (€ tis.)</td><td class="n">−71</td><td class="n">−77</td><td class="n">−84</td><td class="n">−91</td><td class="n">−98</td><td class="n">−105</td><td class="n">−111</td><td class="n">−117</td><td class="n">−123</td><td class="n">−127</td><td class="n">−131</td><td class="n">−135</td></tr>
+</tbody></table></div>
+<p class="muted">Pri rozpočte na reklamu zmrazenom na úrovni M12 dosiahne realistický scenár mesačné tržby ~€49 tis. v M18 a ~€57 tis. v M24, keď mesačná EBITDA dosahuje okolo +€2 tis. Konzervatívny scenár sa pri týchto predpokladoch nikdy nezaplatí: LTV/CAC 0,4 znamená, že každý zákazník stojí viac, než prinesie.</p>
+
+<h3>Rozpis počiatočného kapitálu (realistický) <span class="tag O">O</span></h3>
+<div class="tbl"><table>
+<thead><tr><th>Položka</th><th class="n">€</th><th>Poznámka</th></tr></thead>
+<tbody>
+<tr><td>Brand identita, obaly, dizajn</td><td class="n">8 000</td><td>S lacnejším UI/UX od známych dizajnérov</td></tr>
+<tr><td>Shopify e-shop CZ+SK, aplikácie, integrácie (Packeta, Heureka, e-mail)</td><td class="n">3 000</td><td>Vlastný vývoj, platia sa len aplikácie a témy</td></tr>
+<tr><td>Vývoj 5–7 PL receptúr, laboratórne testy, etikety, registrácie</td><td class="n">9 000</td><td>Registrácia prevádzkovateľa krmív (SK: ÚKSÚP, CZ: ÚKZÚZ)</td></tr>
+<tr><td>Foto, video, prvé UGC</td><td class="n">6 000</td><td></td></tr>
+<tr><td>Právne (obchodné podmienky, GDPR, ochranná známka EUIPO)</td><td class="n">3 000</td><td></td></tr>
+<tr><td>Rezerva</td><td class="n">6 000</td><td></td></tr>
+<tr><td><b>Počiatočné náklady spolu</b></td><td class="n"><b>35 000</b></td><td></td></tr>
+<tr><td>Zásoby (prvé MOQ PL + distribučný sklad)</td><td class="n">30 000</td><td>Pracovný kapitál, vracia sa predajom</td></tr>
+<tr><td>Prevádzkové straty do bodu zvratu</td><td class="n">~80 000</td><td>Z modelu</td></tr>
+<tr><td><b>Kapitál spolu</b></td><td class="n"><b>~145 000</b></td><td>Ideálne po fázach, nie naraz</td></tr>
+</tbody></table></div>
+
+<div class="callout">
+<p><b>Čo musí platiť, aby sa to oplatilo</b> (citlivosť modelu): príspevok na objednávku ≥ €14 (AOV ≥ €40 pri hrubej marži ≥ 47 %), blended CAC ≤ €20 a ≥ 3,2 objednávky na zákazníka za rok. Pri splnení týchto podmienok vychádza LTV/CAC ≥ 2,5 a bod zvratu do 12 mesiacov. Najväčšia páka je hrubá marža (podiel vlastných produktov), nie objem reklamy.</p>
+</div>
+</section>
+
+<section id="marketing">
+<h2>7. Marketingová stratégia</h2>
+<h3>Ako sa líšia motivácie mačkárov <span class="tag H">H</span></h3>
+<ul>
+<li><b>Vina a starosť o indoor mačku</b> („nudí sa“, „málo pije“, „je tučná“): edukácia, ktorá upokojuje.</li>
+<li><b>Vyberavosť a odmietanie jedla</b>: najsilnejší emocionálny spúšťač, ideálny na demo videá.</li>
+<li><b>Estetika domova a zápach</b>: mačka žije v obývačke, nie na dvore.</li>
+<li><b>Humor a identita „cat person“</b>: memy, „môj šéf je mačka“, „freaky little roommate“ v štýle Smalls.</li>
+<li><b>Menej verejnej komunity</b>: komunita je online (IG, TikTok, FB skupiny, útulky), nie na prechádzke.</li>
+</ul>
+
+<h3>Kanály</h3>
+<div class="tbl"><table>
+<thead><tr><th>Kanál</th><th>Úloha</th><th>Ako</th></tr></thead>
+<tbody>
+<tr><td>Meta Ads</td><td>Hlavný akvizičný kanál</td><td>UGC videá, carousel „pred a po“, Advantage+ s 5–8 kreatívami týždenne. Retargeting na degustačný box.</td></tr>
+<tr><td>TikTok</td><td>Dosah a testovanie hookov</td><td>Spark Ads z UGC. Formáty „mačka testuje“ a „vyberavec vs. topper“.</td></tr>
+<tr><td>Instagram</td><td>Značka a komunita</td><td>Reels, repost zákazníckych mačiek („Mačka mesiaca“), highlighty s edukáciou.</td></tr>
+<tr><td>UGC</td><td>Palivo pre reklamy</td><td>20–30 mikrotvorcov mesačne (produkt + €50–150), zmluvné práva na použitie v reklame.</td></tr>
+<tr><td>Influenceri</td><td>Dôvera</td><td>Mačací účty CZ/SK, veterinári a veterinárne sestry na Instagrame, chovatelia. Affiliate kód namiesto paušálu.</td></tr>
+<tr><td>Edukácia + SEO</td><td>Organika a dôvera</td><td>Klastre tém: „mačka málo pije“, „mačka nechce jesť“, „chlpové guľky“, „struvity“, „kastrát priberá“. Kvíz „Čo trápi tvoju mačku?“.</td></tr>
+<tr><td>E-mail / SMS</td><td>Retencia</td><td>Flow podľa spotreby (pripomenutie v 25. deň), post-purchase edukácia, žiadosť o recenziu na Heureke a pri produkte, winback.</td></tr>
+<tr><td>Pravidelné doručovanie</td><td>Retencia</td><td>Mäkká verzia: „doručovať každých X týždňov“ so zľavou 10 % a pauzou na 1 klik. Nie tvrdé predplatné.</td></tr>
+<tr><td>Komunita</td><td>Šírenie a odporúčania</td><td>Partnerstvo s útulkami (balíček pri adopcii mačky), program pre chovateľov, výstavy mačiek, mačacie kaviarne.</td></tr>
+<tr><td>Heureka / Zboží</td><td>Dopyt s vysokým zámerom</td><td>Od 1. dňa, cieľ hodnotenie 4,8+ a certifikát Overené zákazníkmi.</td></tr>
+</tbody></table></div>
+
+<h3>10 reklamných konceptov</h3>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Hook</th><th>Problém</th><th>Predajný argument</th><th>Formát</th><th>CTA</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>„Jej misku som 3× vyhodila. Potom som skúsila toto.“</td><td>Vyberavosť</td><td>Topper premení odmietané krmivo na „zjedené za 30 sekúnd“</td><td>UGC selfie video, 15 s, reálny čas v rohu</td><td>Vyskúšaj topper za €9</td></tr>
+<tr><td>2</td><td>„Tvoja mačka pije menej, než si myslíš.“</td><td>Nízka hydratácia, riziko močových problémov</td><td>Lízacie pyré „Hydro“ = denná dávka tekutín ako odmena</td><td>Animovaná infografika + mačka lížúca z ruky</td><td>Zisti, koľko by mala piť (kvíz)</td></tr>
+<tr><td>3</td><td>POV: si mačka a niekto ti zmenil krmivo</td><td>Strach z prechodu na nové krmivo</td><td>Degustačný box: 8 chutí, nájdeš jej favorita bez vyhadzovania</td><td>Humorný TikTok skit</td><td>Objednaj degustačný box</td></tr>
+<tr><td>4</td><td>„Veterinárka mi povedala jednu vec o kastrátoch…“</td><td>Kastrát priberá, nuda</td><td>Low-kcal pamlsky + enrichment hračka</td><td>Talking head veterinárky (influencer)</td><td>Pozri sadu pre kastráta</td></tr>
+<tr><td>5</td><td>„Zvuk, ktorý nechceš počuť o 3:00 v noci.“ (zvuk chlpovej guľky)</td><td>Chlpové guľky</td><td>Pyré „Hairball“ s vlákninou, podáva sa ako pamlsok</td><td>Audio-first video, čierna obrazovka → produkt</td><td>Kúp Hairball pyré</td></tr>
+<tr><td>6</td><td>„Pred a po 6 týždňoch.“</td><td>Matná srsť, lupiny</td><td>Olej srsť a koža (omega-3), 1 pumpička denne</td><td>Split-screen fotografie od zákazníkov</td><td>Začni 6-týždňovú kúru</td></tr>
+<tr><td>7</td><td>„Prečo tvoja mačka nenávidí tablety (a ako to obísť).“</td><td>Podávanie doplnkov a liekov</td><td>Všetko v forme pasty, prášku alebo pyré, bez boja</td><td>Carousel s 5 krokmi</td><td>Pozri doplnky bez tabliet</td></tr>
+<tr><td>8</td><td>„Senior mód: zapnutý.“</td><td>Starnúca mačka (kĺby, obličky)</td><td>Seniorský balíček: kĺby + hydratácia + jemný topper</td><td>Emotívne video, mačka 14 rokov na slnku</td><td>Zostav balíček pre seniora</td></tr>
+<tr><td>9</td><td>„Adoptoval si mačku? Toto ti nikto nepovie.“</td><td>Neistota nového majiteľa</td><td>Štartovací box + 7-dňový e-mail kurz zdarma</td><td>Reels so zoznamom 5 chýb</td><td>Stiahni checklist + box</td></tr>
+<tr><td>10</td><td>„Robíme len pre mačky. Psy prepáčte.“</td><td>Generické pet shopy, „mačky ako druhá kategória“</td><td>Špecializácia, odborníci na mačky, recenzie</td><td>Brand video s humorom, psí cameo</td><td>Spoznaj značku</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="rizika">
+<h2>8. Riziká a bariéry</h2>
+<div class="tbl"><table>
+<thead><tr><th>Riziko</th><th>Prečo je reálne</th><th>Ako ho zmierniť</th></tr></thead>
+<tbody>
+<tr><td>Nízka ochota platiť za prémiu</td><td>Veľká časť mačiek je kŕmená lacno, diskonty a privátne značky sú silné</td><td>Cieliť na mestské bytové mačky. Vstup cez lacný topper alebo pyré, nie cez drahé krmivo. Ukazovať cenu na deň.</td></tr>
+<tr><td>Silní veľkí hráči</td><td>Zoohit, Spokojený pes, Super zoo, Rohlík, Alza a výrobcovia VAFO a PPF</td><td>Nesúťažiť cenou ani šírkou. Súťažiť vlastnými produktmi, obsahom a skúsenosťou.</td></tr>
+<tr><td>Nízka diferenciácia</td><td>Distribuované značky sú k dispozícii všade</td><td>Do 6 mesiacov ≥ 50 % tržieb z vlastnej značky. Distribuovať len značky mimo supermarketov.</td></tr>
+<tr><td>Rastúce náklady na reklamu</td><td>Malé trhy sa rýchlo vyčerpajú, CPM rastie</td><td>UGC engine, SEO, affiliate, útulky a chovatelia. Cieľ ≥ 30 % organických nových zákazníkov do M12.</td></tr>
+<tr><td>Logistika krmiva a steliva</td><td>Ťažké a objemné zásielky, doprava zadarmo zjedá maržu</td><td>Prah dopravy zadarmo ~€39. Stelivo odložiť. Packeta/Zásilkovna výdajné miesta. 3PL v CZ s prepravou na SK.</td></tr>
+<tr><td>Nízka retencia</td><td>Mačka prestane jesť a zákazník odchádza</td><td>Degustačný box, záruka „nezje, vrátime peniaze“ (pri prvom nákupe), pripomenutia podľa spotreby.</td></tr>
+<tr><td>Budovanie dôvery</td><td>Nová značka, zdravotné tvrdenia</td><td>Veterinárny poradca s menom a tvárou, transparentné zloženie, laboratórne rozbory, Heureka od 1. dňa.</td></tr>
+<tr><td>Regulácia krmív a doplnkov</td><td>Registrácia prevádzkovateľa (SK zákon 271/2005, ÚKSÚP), označovanie podľa nariadenia EÚ 767/2009, zákaz liečebných tvrdení</td><td>Co-packer s registráciou a HACCP, revízia etikiet a copy odborníkom. Diétne krmivá iba podľa zoznamu „particular nutritional purposes“.</td></tr>
+<tr><td>Závislosť od dodávateľov</td><td>MOQ, výpadky, kopírovanie receptúr</td><td>2 dodávatelia na kľúčové SKU, vlastníctvo receptúry v zmluve, ochranná známka EUIPO.</td></tr>
+<tr><td>Vstup psej značky do mačiek</td><td>Rufruf, LOUIE, Vegdog to už robia alebo môžu urobiť kedykoľvek</td><td>Byť prvý s jasnou identitou „len pre mačky“, ktorú psia značka nemôže uveriteľne prevziať.</td></tr>
+<tr><td>Malý slovenský trh</td><td>535 tis. mačiek</td><td>Spustiť CZ+SK naraz. CZ je asi 2,6× väčší. Plán na PL/HU/AT do 24 mesiacov.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="zhodnotenie">
+<h2>9. Finálne investičné zhodnotenie</h2>
+<div class="tbl"><table>
+<thead><tr><th>Otázka</th><th>Odpoveď</th></tr></thead>
+<tbody>
+<tr><td>1. Má koncept reálny potenciál?</td><td>Áno, ako nika. Nie ako kópia Rufrufu, ale ako „funkčná a zdravotná“ mačacia značka s vlastnými produktmi s vysokou maržou.</td></tr>
+<tr><td>2. Je trh dostatočne veľký?</td><td>Na lokálnu značku s tržbami €0,5–1 mil. áno. Na veľký biznis nie bez expanzie (PL má 7,5 mil. mačiek, HU 2,4 mil., AT 2,0 mil.).</td></tr>
+<tr><td>3. Je na ňom priestor pre novú značku?</td><td>Áno. Nenašiel som žiadnu DTC značku výhradne pre mačky so silným brandingom. Najbližšia je Shelma (retail).</td></tr>
+<tr><td>4. V čom sa odlíšiť?</td><td>Riešenie konkrétnych mačacích problémov (vyberavosť, hydratácia, chlpové guľky, senior), formy bez tabliet, humor a identita „len pre mačky“, odborná dôvera (veterinár).</td></tr>
+<tr><td>5. Najlepší vstupný segment</td><td>Toppery a funkčné lízacie pamlsky, nasledované doplnkami. Mokré krmivo len ako kurátorovaný frekvenčný doplnok.</td></tr>
+<tr><td>6. Distribúcia alebo vlastná značka?</td><td>Hybrid od 1. dňa: vlastná značka na maržu a identitu, distribúcia na košík a frekvenciu. Čistá distribúcia ekonomicky nevychádza (pozri konzervatívny scenár).</td></tr>
+<tr><td>7. Potrebný kapitál</td><td>~€145 tis. do bodu zvratu (realisticky), ideálne po fázach: €35–45 tis. na validáciu, potom €100 tis. na škálovanie, iba ak sú splnené KPI.</td></tr>
+<tr><td>8. Dosiahnuteľné tržby a ziskovosť</td><td>Realisticky ~€0,25 mil. v 1. roku a ~€0,6–0,7 mil. ročný run-rate v 2. roku, EBITDA okolo nuly až mierne kladná. Optimisticky €0,65 mil. v 1. roku a €1,3 mil. a viac v 2. roku pri 15–25 % EBITDA.</td></tr>
+<tr><td>9. Najväčšia konkurenčná výhoda</td><td>Vlastné hero produkty, ktoré nikto iný nemá, plus nízke náklady na vývoj e-shopu (vlastný Shopify vývoj, lacný dizajn) a know-how výkonnostného marketingu z prostredia GymBeamu.</td></tr>
+<tr><td>10. Oplatí sa to rozbehnúť?</td><td><b>Áno, ako lacný test na 3 mesiace s prísnymi bránami. Nie ako okamžitá investícia €150 tis.</b> Ak validácia nepotvrdí CAC ≤ €25 a 60-dňový opakovaný nákup ≥ 25 %, projekt zastaviť.</td></tr>
+</tbody></table></div>
+
+<h3>Skóre (1–10) <span class="tag H">H</span></h3>
+<div class="score"><span>Veľkosť trhu</span><div class="bar"><i style="width:50%"></i></div><b>5</b></div>
+<div class="score"><span>Trhová príležitosť</span><div class="bar"><i style="width:65%"></i></div><b>6,5</b></div>
+<div class="score"><span>Konkurencia (10 = slabá)</span><div class="bar"><i style="width:40%"></i></div><b>4</b></div>
+<div class="score"><span>Maržový potenciál</span><div class="bar"><i style="width:70%"></i></div><b>7</b></div>
+<div class="score"><span>Retencia</span><div class="bar"><i style="width:60%"></i></div><b>6</b></div>
+<div class="score"><span>Marketingový potenciál</span><div class="bar"><i style="width:75%"></i></div><b>7,5</b></div>
+<div class="score"><span>Škálovateľnosť</span><div class="bar"><i style="width:60%"></i></div><b>6</b></div>
+<div class="score"><span><b>Celková atraktivita</b></span><div class="bar"><i style="width:55%"></i></div><b>5,5</b></div>
+<p class="muted">Maržový potenciál je 7 iba pri hybride s vlastnou značkou. Pri čistej distribúcii by bol 3.</p>
+
+<h3>Návrh validačnej fázy (90 dní)</h3>
+<ol>
+<li><b>Týždne 1–4:</b> dopyt pred spustením. Landing page + kvíz „Čo trápi tvoju mačku?“, €1 500 do reklamy, meranie CTR a registrácií na waitlist (cieľ CPL ≤ €1,5). Paralelne ponuky od 3 co-packerov.</li>
+<li><b>Týždne 5–8:</b> MVP e-shop so 3 hero produktmi (malé MOQ) a 2 distribuovanými značkami mokrého krmiva. 20 UGC tvorcov.</li>
+<li><b>Týždne 9–13:</b> €3–4 tis. mesačne do reklamy. Meranie: konverzný pomer ≥ 1,5 %, AOV ≥ €38, blended CAC ≤ €25, opakovaný nákup do 60 dní ≥ 25 %, hrubá marža ≥ 45 %, Heureka ≥ 4,8.</li>
+<li><b>Rozhodnutie:</b> splnené 4 z 5 brán → škálovať. 2–3 brány → upraviť produkt alebo posolstvo a opakovať 60 dní. Menej → zastaviť.</li>
+</ol>
+</section>
+
+<section id="zdroje">
+<h2>10. Zdroje</h2>
+<ol class="src">
+<li><a href="https://www.rufruf.cz/">Rufruf.cz – hlavná stránka</a> · <a href="https://www.rufruf.cz/produkty/pamlsky">pamlsky</a> · <a href="https://www.rufruf.cz/produkt/magicky-prasek-hovezi">Magický prášek</a> · <a href="https://www.rufruf.sk/produkt/magicky-prasok-hovadzi">rufruf.sk produkt</a></li>
+<li><a href="https://www.heureka.cz/znacky/rufruf/">Heureka.cz – značka Rufruf (ceny, recenzie)</a> · <a href="https://www.zbozi.cz/vyrobek/rufruf-vitaminy-zdrave-zazivani-100-tbl/">Zboží.cz – Rufruf vitamíny</a></li>
+<li><a href="https://www.zzf.de/fileadmin/ZZF/Dokumente/Heimtiermarkt/FEDIAF_Facts_Figures_2026.pdf">FEDIAF Facts &amp; Figures 2026 (údaje 2024)</a></li>
+<li><a href="https://www.teraz.sk/slovensko/prieskum-pes-je-oblubenejsim-domac/573099-clanok.html">TASR – prieskum Go4insight 2021 (SK domácnosti)</a></li>
+<li><a href="https://cnn.iprima.cz/stereotypy-o-majitelich-kocek-uz-davno-neplati-vite-jaci-jsou-doopravdy-352386">CNN Prima – prieskum NMS pre Whiskas</a> · <a href="https://cnn.iprima.cz/mazlicci-jako-luxus-472926">CNN Prima – náklady na chov (Kovanda)</a></li>
+<li><a href="https://www.mediaguru.cz/retail-in-detail-kvalita-je-zadanejsi-i-pro-domaci-zvirata">MediaGuru – Nielsen, premiumizácia, útrata za mačku vs. psa</a></li>
+<li><a href="https://www.ceskenoviny.cz/zpravy/2351700">ČTK – Super Zoo, útrata na mačky a psy</a></li>
+<li><a href="https://www.seznamzpravy.cz/clanek/312179">Seznam Zprávy – český pet food priemysel (VAFO, Dibaq, Ruf ruf)</a></li>
+<li><a href="https://forbes.cz/prvni-granule-rozvazel-ve-skode-120-dnes-jimi-juko-zasobuje-celou-zemi/">Forbes CZ – preplnený trh krmív (Juko)</a></li>
+<li><a href="https://www.popai.cz/media/knihovna/eyNJVS-46km6zkIakLJ0bg/MWq3vCQ190WJM4rBUonDsQ/TZ_NielsenIQ_Q1-2025_CZ_Navrat-k-premiu_Cesi-znovu-chteji-vic.pdf">NielsenIQ Q1 2025 – návrat k prémiu</a></li>
+<li><a href="https://cc.cz/trend-longevity-dorazil-i-k-domacim-zviratum-cesi-je-propojuji-s-veterinari-a-nabizi-vyzivu-na-miru/">CzechCrunch – Vetstor, longevity</a></li>
+<li><a href="https://cnn.iprima.cz/kdyz-miska-neni-jen-rutina-proc-se-stale-vic-chovatelu-diva-na-slozeni-krmiva-509419">CNN Prima – LOUIE vstupuje do mačiek</a></li>
+<li><a href="https://forbes.cz/zakousnout-se-do-slovenska-a-utrzit-miliardu-spokojeny-pes-sazi-na-expanzi/">Forbes CZ – Spokojený pes, 640 mil. Kč</a> · <a href="https://www.echo24.cz/a/Jp5kn/super-zoo-ma-novy-eshop-od-peckadesign-bezi-na-platforme-publicator-7">Echo24 – Super zoo</a> · <a href="https://www.newstream.cz/stitek/petshopy">Newstream – Super zoo 350 predajní</a></li>
+<li><a href="https://ecommercedb.com/store/zoohit.sk">ECDB – zoohit.sk</a> · <a href="https://www.similarweb.com/de/website/zoohit.sk/competitors">Similarweb – konkurenti zoohit.sk</a> · <a href="https://ecommercedb.com/markets/cz/cat-supplies">ECDB – Cat Supplies CZ</a></li>
+<li><a href="https://www.rohlik.cz/1387400-shelma-bezobilne-dusene-filetky-masovy-vyber-pro-kocky-12-85-g">Rohlík – Shelma (PPF)</a> · <a href="https://www.rohlik.cz/1460452-shelma-immunity-bezobilne-polstarky-pro-kocku-hovezi-a-boruvky">Shelma Immunity</a></li>
+<li><a href="https://www.spokojenakocka.cz/">Spokojená kočka</a> · <a href="https://kockarium.cz/">Kočkárium</a> · <a href="https://www.svetkocicek.cz/chovatelske-potreby-pro-kocky-a-psy/">Svět kočiček</a> · <a href="https://www.zoohit.cz/shop/kocky">Zoohit</a></li>
+<li><a href="https://www.lekarna.cz/kocky/?forma=pasta">Lékárna.cz – pasty pre mačky (Zesty Paws)</a> · <a href="https://www.zbozi.cz/doplnky-stravy-pro-kocky/?strana=2">Zboží.cz – doplnky pre mačky</a> · <a href="https://www.lekarna.cz/pochoutky/">Lékárna.cz – pamlsky pre mačky</a></li>
+<li><a href="https://retailtimes.co.uk/?p=147870">Untamed – Series B</a> · <a href="https://dealroom.co/companies/untamed-cat-food/">Dealroom – Untamed</a></li>
+<li><a href="https://www.thegrocer.co.uk/news/catfood-challenger-katkin-secures-37m-scale-up-investment/713118.article">The Grocer – KatKin</a> · <a href="https://globalpetindustry.com/news/new-round-of-capital-injections-for-pet-players-worldwide/">GlobalPETS – KatKin kliniky</a></li>
+<li><a href="https://www.pulse.bot/marketing/news/the-marketing-playbook-that-propelled-this-cat-food-brand-to-100-million-in-less-than-a-decade-25d699aa-e27e-439b-9eac-bf1c6d07c68c">Inc./Pulse – Smalls $100 mil.</a> · <a href="https://www.petfoodprocessing.net/articles/20844-feline-first-freshness">Pet Food Processing – Smalls</a> · <a href="https://techcrunch.com/?p=2027532">TechCrunch – Smalls</a></li>
+<li><a href="https://petsplusmag.com/weruva-expands-its-feline-focus-with-acquisition-of-cat-person">Weruva kupuje Cat Person</a></li>
+<li><a href="https://petfoodprocessing.net/articles/16549-german-cat-food-company-launches-to-define-cat-nutrition">The Better Cat – spustenie</a> · <a href="https://www.petworldwide.net/content-1/pet-worldwide/2024/the-better-cat.html">The Better Cat – preventívna výživa</a></li>
+<li><a href="https://techlist.ai/prettylitter.com">PrettyLitter – model</a> · <a href="https://subger.com/en/ie/service/prettylitter-health">PrettyLitter – ceny</a></li>
+<li><a href="https://www.dtcetc.com/brand/tuft-and-paw">Tuft + Paw</a> · <a href="https://cats.com/?p=90609">Tuft + Paw stelivo na predplatné</a></li>
+<li><a href="https://cavac.at/cavacopedia/Draft%3AEdgard%20%26amp%3B%20Cooper">Edgard &amp; Cooper</a> · <a href="https://www.petworldwide.net/content-1/pet-worldwide/2023/05/2-2023/a-successful-belgian-concept.html">Edgard &amp; Cooper – mačky od 2022</a></li>
+<li><a href="https://www.petstock.com.au/collections/ziwi-peak">ZIWI Peak</a> · <a href="https://www.mustigroup.com/smaak-cat-range-delicacies/">Musti Smaak</a> · <a href="https://globalpetindustry.com/article/leading-pet-retail-in-the-nordics-insights-from-mustis-chief-commercial-officer/">Musti own brands</a> · <a href="https://funnelfeedr.com/en/company/se/partner-in-pet-food-nordics-ab-5560555129">PPF Nordics (Mjau)</a></li>
+<li><a href="https://www.just-food.com/?p=192245">Just Food – Purrform</a> · <a href="https://globalpetindustry.com/news/pet-industry-sees-fresh-wave-of-ma-deals-this-winter/">GlobalPETS – Made by Nacho</a> · <a href="https://proteinproductiontechnology.com/post/vegdog-enters-the-cat-market-with-fermented-protein-vegcat-snacks-as-plant-based-pet-nutrition-evolves">Vegdog VEGCAT</a> · <a href="https://www.kaufland.cz/product/467105955/">Churu (Kaufland)</a></li>
+<li><a href="https://static.slov-lex.sk/static/SK/ZZ/2005/271/20190101.html">Zákon 271/2005 Z. z. – registrácia krmivárskych podnikov</a> · <a href="https://www.uksup.sk/storage/app/uploads/public/5b8/fec/9d2/5b8fec9d2ee3d747360146.pdf">ÚKSÚP – otázky a odpovede k nariadeniu 183/2005</a></li>
+</ol>
+<p class="muted">Obmedzenia: neboli k dispozícii platené štúdie (Euromonitor, NielsenIQ pet panel), Meta Ad Library ani dáta o návštevnosti a tržbách Rufrufu. Údaje o domácnostiach sú z rokov 2018–2021. Finančný model je ilustratívny a pred investíciou ho treba nahradiť reálnymi cenovými ponukami co-packerov a výsledkami validačného testu.</p>
+</section>
+</main>
+</div>
+</body>
+</html>
