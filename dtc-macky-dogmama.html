@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zahraničné DTC značky pre mačky – research podľa modelu DogMama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f2; --paper:#ffffff; --ink:#1f1d1a; --muted:#6b645b; --line:#e7e0d5;
+  --accent:#b4532a; --accent-soft:#f6e6dc; --teal:#1f6f6a; --teal-soft:#dff0ee;
+  --gold:#8a6a12; --gold-soft:#f5edd3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:var(--teal);text-decoration:underline;text-underline-offset:2px;word-break:break-word}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(28px,4vw,44px)}
+h2{font-size:clamp(24px,3vw,32px);margin-top:1.6em;padding-top:.4em;border-top:2px solid var(--ink)}
+h3{font-size:21px;margin-top:1.4em}
+h4{margin:1em 0 .3em;font-size:15px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 20px 80px}
+header.hero{padding:40px 0 24px}
+.kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.lead{font-size:18px;color:#3b3732;max-width:780px}
+nav.toc{position:sticky;top:0;z-index:5;background:rgba(250,247,242,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -20px;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav.toc a{font-size:13px;font-weight:600;text-decoration:none;color:var(--ink);padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+nav.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.card h3{margin-top:0}
+.brand{margin:18px 0}
+.brand .meta{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.tag{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:#f0ebe3;color:#4a443c}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:5px;vertical-align:middle}
+.ok{background:var(--teal-soft);color:var(--teal)}
+.est{background:var(--gold-soft);color:var(--gold)}
+.dl{display:grid;grid-template-columns:170px 1fr;gap:6px 14px;font-size:15px}
+.dl dt{font-weight:600;color:var(--muted)}
+.dl dd{margin:0}
+@media(max-width:640px){.dl{grid-template-columns:1fr}.dl dt{margin-top:6px}}
+.why{margin-top:12px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:15px}
+table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f2ede5;font-weight:700;font-size:13px;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num{text-align:center;font-variant-numeric:tabular-nums}
+td.total{font-weight:700;text-align:center;background:var(--accent-soft)}
+.callout{background:var(--ink);color:#f6f2ea;border-radius:14px;padding:22px 24px;margin:18px 0}
+.callout h3{color:#fff;margin-top:0}
+.callout a{color:#9fd8d2}
+ul.tight{margin:.3em 0 .6em;padding-left:1.2em}
+ul.tight li{margin:.2em 0}
+.small{font-size:13px;color:var(--muted)}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.rec{border:2px solid var(--accent)}
+.rec .n{font-family:Fraunces,serif;font-size:40px;color:var(--accent);line-height:1}
+footer{margin-top:48px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Market research · November 2026</div>
+  <h1>Zahraničné DTC značky pre mačky podľa modelu DogMama</h1>
+  <p class="lead">26 overených značiek z USA, Kanady, UK, DACH, Francúzska, Beneluxu, Škandinávie, Austrálie a Japonska. Ku každej je rozbor marketingu, top 10 produktových konceptov s bodovaním, medzery na trhu SK/CZ a odporúčanie, s čím postaviť prémiovú mačaciu DTC značku.</p>
+  <div class="pill-row">
+    <span class="badge ok">Overené</span> <span class="small">= fakt z verejného zdroja (e-shop, retailer, tlač), stav k 11/2026</span>
+    <span class="badge est">Odhad</span> <span class="small">= môj vlastný úsudok alebo výpočet, treba ho overiť</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#dogmama">0. DogMama</a>
+  <a href="#zhrnutie">Zhrnutie</a>
+  <a href="#a">A. 26 značiek</a>
+  <a href="#b">B. Top 10 konceptov</a>
+  <a href="#c">C. Top 5 marketing</a>
+  <a href="#d">D. Príležitosti SK/CZ</a>
+  <a href="#e">E. Odporúčanie</a>
+  <a href="#metodika">Metodika</a>
+</nav>
+
+<!-- ============ 0. DOGMAMA ============ -->
+<h2 id="dogmama">0. Referenčná značka: DogMama</h2>
+<div class="grid2">
+  <div class="card">
+    <h4>Produkt a model <span class="badge ok">Overené</span></h4>
+    <ul class="tight">
+      <li>Značku založila v roku 2023 Veronika spolu s dvoma kamarátmi. Jedna kategória: <b>„Vitamlsky“</b>, teda funkčné maškrty pre psy, ktoré sú zároveň doplnkom výživy.</li>
+      <li>Rada podľa problému a životnej fázy: Multifunkčné 6v1, Srsť &amp; Koža, Zdravé trávenie + Probiotiká, Alergia &amp; Imunita, Kosti &amp; Kĺby + Kolagén, Senior, Kľud &amp; Pohoda, Šteňa &amp; Junior.</li>
+      <li>Jedna cenová hladina <b>34,99 €</b> za 90 ks (270 g). Komunikuje sa ako zásoba „až na 3 mesiace“ pri dávkovaní 1 ks/10 kg.</li>
+      <li>Promo mechaniky: <b>3+1 zadarmo</b> pri ľubovoľnej kombinácii, vianočné balíčky (4 krabičky za 104,97 € namiesto 139,96 €), 1+1.</li>
+      <li>Trh SK aj CZ (dogmama.sk, dogmama.cz). Podľa štruktúry URL beží na Shopify. <span class="badge est">Odhad</span></li>
+    </ul>
+    <p class="small">Zdroje: <a href="https://dogmama.cz/sk/pages/about-us">O nás</a> · <a href="https://dogmama.sk/collections/vitamlsky">Kolekcia</a> · <a href="https://www.dogmama.sk/products/multifunkcny-6v1">6v1</a> · <a href="https://www.dogmama.sk/products/srst-a-koza">Srsť &amp; Koža</a></p>
+  </div>
+  <div class="card">
+    <h4>Komunikácia a predajné argumenty <span class="badge ok">Overené</span></h4>
+    <ul class="tight">
+      <li><b>Problém → riešenie:</b> maškrty „proti svrbeniu, hnačkám, zlej kvalite srsti a bolestiam kĺbov“.</li>
+      <li><b>Analógia s človekom:</b> psy potrebujú dennú dávku vitamínov rovnako ako ľudia.</li>
+      <li><b>Autorita zloženia:</b> „najvyšší podiel aktívnych látok“, „nová receptúra až 5× silnejšia“, vymenované účinné látky (glukozamín, chondroitín, boswellia, spirulina, rybí olej…).</li>
+      <li><b>Sociálny dôkaz:</b> počet recenzií priamo v listingu (6v1: 232, Šteňa: 69, Senior: 36).</li>
+      <li><b>Emócia a misia:</b> dlhý, šťastný a zdravý život psa, rodinný tón.</li>
+      <li><b>Konverzné prvky:</b> doručenie do 1–2 dní, bundly, zľavy na viac kusov.</li>
+    </ul>
+    <h4>Čo to znamená pre mačky <span class="badge est">Odhad</span></h4>
+    <p>Prenositeľné sú štyri veci: jeden hero formát (funkčná maškrta), SKU podľa problému, jednotná cena s vysokým AOV a „3-mesačná zásoba“ ako nákupný cyklus. Pri mačkách je problém v tom, že suché „tabletky na odmenu“ veľa mačiek odmietne. Formát preto musí riešiť akceptáciu (lízatko, dual-texture, polievka, prášok).</p>
+  </div>
+</div>
+
+<!-- ============ ZHRNUTIE ============ -->
+<h2 id="zhrnutie">Zhrnutie v piatich bodoch</h2>
+<div class="callout">
+  <ol class="tight">
+    <li><b>Mačací segment sa práve „prebúdza“.</b> Smalls dosiahol 100 M $ ročných tržieb, KatKin drží 2 % britského trhu s krmivom pre mačky. Veľké psie suplementové značky (Native Pet v septembri 2026) práve spúšťajú prvé mačacie rady. <span class="badge ok">Overené</span></li>
+    <li><b>Formát je pri mačkách dôležitejší ako zloženie.</b> Víťazné formáty sú lízatká a pyré, dual-texture (chrumkavé zvonka, krémové vnútri), funkčné polievky a prášky na posypanie. Zesty Paws má pri niektorých lízatkách na Chewy hodnotenie len 3,3/5, pretože ich mačky odmietajú. <span class="badge ok">Overené</span></li>
+    <li><b>Najsilnejšie predajné uhly:</b> chlpové gule a zvracanie, mačka málo pije a má problémy s močovými cestami, stres, vyberavé jedenie, zápach z toalety a senior. <span class="badge est">Odhad</span> (podľa reklám a landing pages)</li>
+    <li><b>Na SK/CZ sú funkčné mačacie produkty len od retailových a veterinárnych značiek</b> (Brit Care, Canvit, GimCat, Miamor, Vitakraft, Churu, Cymedica). DTC „love brand“ so storytellingom a predplatným som pri vyhľadávaní nenašiel. <span class="badge est">Odhad</span></li>
+    <li><b>Odporúčanie:</b> značka postavená na <b>funkčných lízatkách</b> (mačacie „vitamlsky“ v tube). Hero problém <b>stres + močové cesty + pitný režim</b>, ako druhý pilier denné dual-texture chews. Detaily v <a href="#e">sekcii E</a>.</li>
+  </ol>
+</div>
+
+<!-- ============ A ============ -->
+<h2 id="a">A. 26 zahraničných značiek</h2>
+<p>Najprv prehľad, pod ním detail každej značky. Ceny sú z verejne dostupných stránok k dátumu researchu a môžu sa meniť. Odkaz „Ads“ otvorí vyhľadávanie značky v Meta Ads Library, kde vidno jej FB/IG stránky a aktuálne reklamy.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>Značka</th><th>Krajina</th><th>Kategória</th><th>Hero produkt / cena</th><th>Odkaz</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Smalls</b></td><td>USA</td><td>čerstvé krmivo + funkčné lízatká</td><td>Licks Trio (3×8) $24</td><td><a href="https://www.smalls.com/smallsmart/products/fish-licks-supports-skin-and-coat-trio">produkt</a></td></tr>
+<tr><td>2</td><td><b>KatKin</b></td><td>UK</td><td>čerstvé krmivo na predplatné</td><td>od £1,89/deň</td><td><a href="https://www.katkin.com/our-pricing">cenník</a></td></tr>
+<tr><td>3</td><td><b>PrettyLitter</b></td><td>USA (Mars)</td><td>stelivo, ktoré indikuje zdravie</td><td>od $24/mes.</td><td><a href="https://account.prettylitter.com/pages/get-started">produkt</a></td></tr>
+<tr><td>4</td><td><b>Pet Honesty</b></td><td>USA</td><td>suplementy (chews + lízatká)</td><td>3,7 oz $14,99–15,99</td><td><a href="https://www.petsmart.com/cat/vitamins-and-supplements/probiotic-and-digestive/pet-honesty-cat-supplement---probiotics-gut-and-immune-crunchy-and-creamy-chews-chicken-flavor-37-oz-86331.html">produkt</a></td></tr>
+<tr><td>5</td><td><b>Zesty Paws</b></td><td>USA</td><td>suplementy v pene (lízatká)</td><td>14 ks $16,47–17,99</td><td><a href="https://www.zooplus.de/shop/katzen/katzensnacks/pasten_cremes/2325818">zooplus.de</a></td></tr>
+<tr><td>6</td><td><b>Native Pet</b></td><td>USA</td><td>suplementy, nová mačacia rada</td><td>5 dual-texture chews</td><td><a href="https://www.petfoodindustry.com/pet-food-market/product-launches/news/15836058/native-pet-launches-first-cat-supplement-line">launch</a></td></tr>
+<tr><td>7</td><td><b>Made by Nacho</b></td><td>USA</td><td>krmivo, vývary, toppery</td><td>vývar-topper ~$5,97</td><td><a href="https://walmart.com/brand/madebynacho/20048482">značka</a></td></tr>
+<tr><td>8</td><td><b>Cat Person</b></td><td>USA</td><td>krmivo + doplnky, len mačky</td><td>granule, kapsičky, pamlsky</td><td><a href="https://www.chewy.com/cat-person-by-weruva-chicken-turkey/dp/3310054">produkt</a></td></tr>
+<tr><td>9</td><td><b>Tuft + Paw</b></td><td>Kanada</td><td>dizajnový nábytok, stelivo</td><td>toaleta Cove, škrabadlá</td><td><a href="https://www.tuftandpaw.com/collections/cat-furniture">kolekcia</a></td></tr>
+<tr><td>10</td><td><b>Hepper</b></td><td>USA</td><td>dizajnové potreby + obsahové weby</td><td>Nest Bed $59,50</td><td><a href="https://www.hepper.com/products/hepper-nest-cat-bed/">produkt</a></td></tr>
+<tr><td>11</td><td><b>Basepaws</b></td><td>USA (Zoetis)</td><td>DNA a dentálne testy</td><td>$99 / $159</td><td><a href="https://checkout.basepaws.com/products/cat-oral-health-test">produkt</a></td></tr>
+<tr><td>12</td><td><b>Kitty Poo Club</b></td><td>USA</td><td>predplatné toaliet „all-in-one“</td><td>mesačná krabica so stelivom</td><td><a href="https://kittypooclub.com/about/our-story">web</a></td></tr>
+<tr><td>13</td><td><b>Scrumbles</b></td><td>UK</td><td>krmivo s probiotikami (psy aj mačky)</td><td>700 g £7,50</td><td><a href="https://scrumbles.co.uk/collections/natural-cat-food">kolekcia</a></td></tr>
+<tr><td>14</td><td><b>Karnlea</b></td><td>UK (Sev. Írsko)</td><td>funkčné toppery len pre mačky</td><td>100 g £12,99</td><td><a href="https://www.durhamanimalfeeds.co.uk/product/karnlea-mobility-joint-care-cat-100g">produkt</a></td></tr>
+<tr><td>15</td><td><b>PetLab Co.</b></td><td>UK / USA</td><td>suplementy na predplatné</td><td>Probiotics pre mačky</td><td><a href="https://thepetlabco.com/collections/cat-products">kolekcia</a></td></tr>
+<tr><td>16</td><td><b>Pets Deli</b></td><td>Nemecko</td><td>funkčné polievky, krémové snacky</td><td>6×40 g €6,25</td><td><a href="https://www.dm.de/p/d/3070853/">produkt</a></td></tr>
+<tr><td>17</td><td><b>Strayz</b></td><td>Nemecko</td><td>bio krmivo, sociálna značka</td><td>Bio Suppe od €0,99</td><td><a href="https://www.zooplus.de/shop/katzen/katzensnacks/strayz/1751910">produkt</a></td></tr>
+<tr><td>18</td><td><b>Treatsy</b></td><td>Belgicko / FR</td><td>veterinárne suplementy v soft chews</td><td>120 ks €29,99</td><td><a href="https://www.zooplus.de/shop/katzen/katzenfutter_ergaenzung/haarballen/9980078812">produkt</a></td></tr>
+<tr><td>19</td><td><b>Caats</b></td><td>Francúzsko</td><td>personalizované krmivo, len mačky</td><td>od €21/mes.</td><td><a href="https://www.maddyness.com/?p=1393614">profil</a></td></tr>
+<tr><td>20</td><td><b>Japhy</b></td><td>Francúzsko</td><td>personalizované granule (psy aj mačky)</td><td>predplatné</td><td><a href="https://www.presse-citron.net/la-startup-japhy-leve-7me-pour-son-abonnement-de-croquettes-par-internet/">profil</a></td></tr>
+<tr><td>21</td><td><b>Glufs</b></td><td>Švédsko</td><td>krmivo s mušľami, udržateľnosť</td><td>Musselmeow 1 kg 249 SEK</td><td><a href="https://www.apotea.se/glufs-musselmeow-1-kg">produkt</a></td></tr>
+<tr><td>22</td><td><b>Bell &amp; Bone</b></td><td>Austrália</td><td>dentálne pamlsky</td><td>80 g AU$12,99</td><td><a href="https://www.petbarn.com.au/bell-bone-dental-bites-salmon-cat-treat-80g">produkt</a></td></tr>
+<tr><td>23</td><td><b>Wonderfur</b></td><td>Austrália</td><td>funkčné „bites“ (psy aj mačky)</td><td>—</td><td><a href="https://insidesmallbusiness.com.au/latest-news/australian-start-up-launches-healthy-dried-food-for-pets">profil</a></td></tr>
+<tr><td>24</td><td><b>Inaba CIAO Churu</b></td><td>Japonsko</td><td>lízacie pyré vrátane funkčných</td><td>CZ: 4×14 g 62 Kč</td><td><a href="https://www.rohlik.cz/1469158-inaba-churu-cat-snack-hairball-kure-4-14-g">produkt</a></td></tr>
+<tr><td>25</td><td><b>Necoichi</b></td><td>Japonsko</td><td>ergonomické misky</td><td>$15–35</td><td><a href="https://www.chewy.com/necoichi-tilted-stress-free-raised/dp/383345">produkt</a></td></tr>
+<tr><td>26</td><td><b>Catlog (RABO)</b></td><td>Japonsko</td><td>smart obojok + aplikácia</td><td>¥14 850</td><td><a href="https://rabo.cat/en/lp">web</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Detail značiek</h3>
+
+<!-- 1 Smalls -->
+<div class="card brand">
+  <h3>1. Smalls <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">čerstvé krmivo</span><span class="tag">funkčné lízatká</span><span class="tag">predplatné</span><span class="tag">len mačky</span></div>
+  <dl class="dl">
+    <dt>E-shop / produkty</dt><dd><a href="https://www.smalls.com/smallsmart/products/fish-licks-supports-skin-and-coat-trio">Fish Licks Skin &amp; Coat</a> · <a href="https://www.smalls.com/smallsmart/products/bird-licks-supports-digestion-trio">Bird Licks Digestion</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Smalls%20cat%20food&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Kategórie</dt><dd>Čerstvé „human-grade“ krmivo v troch textúrach, mrazom sušené, pamlsky, od roku 2025 funkčné lízatká <b>Licks</b>. <span class="badge ok">Overené</span></dd>
+    <dt>Ceny</dt><dd>Licks Trio (3 balenia po 8 vreciek) <b>$24</b>. Vo vstupnej ponuke prvý box za -50 % a „pamlsky zadarmo navždy“. <span class="badge ok">Overené</span></dd>
+    <dt>USP</dt><dd>Krmivo stavané pre mačky, nie prerobené zo psej výroby. Licks obsahujú reálny vývar, nemajú zahusťovadlá a majú benefit (omega-3 pre srsť, prebiotiká a vláknina pre trávenie).</dd>
+    <dt>Cieľová skupina</dt><dd>Mestskí mileniáli a Gen Z, ktorí majú mačku za „dieťa“.</dd>
+    <dt>Marketing</dt><dd>Podľa Inc. dosiahli 100 M $ ročných tržieb a za dva roky zoštvornásobili reklamný rozpočet. Najprv mali na Meta menej ako 30 % rozpočtu (vďaka tomu ich nezasiahol iOS14), po škálovaní viac ako 60 %. Prémiovú cenu predávajú ako prejav lásky. Kreatívy stavajú na „mačacom diskurze“ a humore. <span class="badge ok">Overené</span></dd>
+    <dt>Vizuál / positioning</dt><dd>Hravý, ilustratívny, s výraznými farbami. „Cat-first“ značka so silnou osobnosťou.</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Licks sú prakticky mačacia verzia „Vitamlskov“. Ukazujú, že funkčné lízatko s jasným benefitom dokáže predať aj značka, ktorá vyrástla na krmive. Dobrá inšpirácia na SKU podľa benefitu a na „bonding“ argument (kŕmenie z ruky).</div>
+</div>
+
+<!-- 2 KatKin -->
+<div class="card brand">
+  <h3>2. KatKin <span class="small">· Veľká Británia</span></h3>
+  <div class="meta"><span class="tag">čerstvé krmivo</span><span class="tag">predplatné</span><span class="tag">len mačky</span></div>
+  <dl class="dl">
+    <dt>E-shop / produkty</dt><dd><a href="https://www.katkin.com/our-pricing">Cenník</a> · <a href="https://www.katkin.com/lp/cat-food-industry-is-broken-2508">landing page „industry is broken“</a> · <a href="https://help.katkin.com/en/articles/431230-nibbles">Nibbles</a> · <a href="https://adlibrary.com/brands/katkin">archív reklám</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=GB&q=KatKin&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Kategórie</dt><dd>Čerstvo varené a zamrazené krmivo v personalizovaných porciách, mrazom sušené pamlsky Nibbles, mlieko, posypky.</dd>
+    <dt>Ceny</dt><dd>Od <b>£1,89/deň</b>. 14-dňový skúšobný box (28 jedál) stojí s 20 % zľavou £23,46–30,13. Štandardný plán vychádza na £60,96–79,03 za 28 dní. Nibbles £7,50 za 50 g. <span class="badge ok">Overené</span></dd>
+    <dt>USP</dt><dd>100 % mäso, šetrné varenie pod 100 °C, porcie na mieru podľa kalórií konkrétnej mačky.</dd>
+    <dt>Čísla</dt><dd>Viac ako 100 M doručených jedál, 2 % britského trhu s krmivom pre mačky, 50 M $ (Series C), vyše 150 zamestnancov. <span class="badge ok">Overené</span></dd>
+    <dt>Marketing</dt><dd>Agresívne porovnanie s konkurenciou na landing pages: cena za deň oproti Lily's Kitchen, % mäsa, „cheap cat food is costing you“. Prieskumy typu „95 % majiteľov vidí zdravšiu mačku“. Vet ambasádor z TV. Reklamy s anime-mačkami, ktoré kritizujú granule, testimonialy „vyberavej mačky“. Opakovaný hook „Fluff-free fresh cat food. Now 20% off“. <span class="badge ok">Overené</span></dd>
+    <dt>Vizuál / positioning</dt><dd>Prémiový, ale s humorom. Pozícia „bojovníka proti priemyslu“ (challenger).</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Najlepšia európska ukážka edukačného „problém → nepriateľ → riešenie“ marketingu pre mačky. Landing pages môžeš priamo použiť ako šablónu pre CRO.</div>
+</div>
+
+<!-- 3 PrettyLitter -->
+<div class="card brand">
+  <h3>3. PrettyLitter <span class="small">· USA (dnes pod Mars)</span></h3>
+  <div class="meta"><span class="tag">stelivo</span><span class="tag">zdravotný monitoring</span><span class="tag">predplatné</span></div>
+  <dl class="dl">
+    <dt>E-shop</dt><dd><a href="https://account.prettylitter.com/pages/get-started">Get started</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=PrettyLitter&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Produkt</dt><dd>Silikátové stelivo, ktoré mení farbu pri abnormálnom pH moču (včasné varovanie pri močových cestách a obličkách). Dopĺňa ho krmivo PrettyPlease.</dd>
+    <dt>Ceny</dt><dd>Od <b>$24/mes.</b> pre 1 mačku, prvé vrecko $14,99, viac ako 12 000 recenzií. <span class="badge ok">Overené</span></dd>
+    <dt>Čísla</dt><dd>V prvom roku 760 tis. $, dnes podľa DTC podcastu vyše 300 M $ tržieb pri malom tíme. Akvizícia Mars. <span class="badge ok">Overené</span></dd>
+    <dt>Marketing</dt><dd>Zakladateľ v reklamách („Hi, I'm Daniel…“) s osobným príbehom o mačke, ktorá zomrela na neodhalenú chorobu. TikTok influenceri pre performance kreatívy, CRO landing pages pre každý kanál, referral a loyalty. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Ukazuje silu argumentu „odhalíš problém skôr ako veterinár“ a to, že aj nudný produkt sa dá predávať emotívne. Pre teba je inšpiráciou hlavne <b>founder-led reklama</b>, ktorú DogMama môže replikovať (Veronika).</div>
+</div>
+
+<!-- 4 Pet Honesty -->
+<div class="card brand">
+  <h3>4. Pet Honesty <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">suplementy</span><span class="tag">dual-texture chews</span><span class="tag">lízatká</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.petsmart.com/cat/vitamins-and-supplements/probiotic-and-digestive/pet-honesty-cat-supplement---probiotics-gut-and-immune-crunchy-and-creamy-chews-chicken-flavor-37-oz-86331.html">Probiotics chews</a> · <a href="https://www.petsmart.com/cat/vitamins-and-supplements/hairball-control/pet-honesty-hairball-support-chews-for-cats-80042.html">Hairball</a> · <a href="https://www.businesswire.com/news/home/20260707075059/en/Pet-Honesty-Fastest-Growing-Cat-Supplement-Brand-in-the-U.S.-Launches-Cat-Squeezables-Bringing-Science-Backed-Wellness-to-a-Format-Cats-Already-Love">Cat Squeezables (PR)</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Pet%20Honesty&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Kategórie</dt><dd>Chews s chrumkavým obalom a krémovou náplňou (Multivitamín, Probiotiká, Srsť, Kĺby, Hairball, Calming, Dental), od 07/2026 aj 8 lízacích pyré <b>Cat Squeezables</b>.</dd>
+    <dt>Ceny</dt><dd>3,7 oz vrecko <b>$14,99–15,99</b> (PetSmart). <span class="badge ok">Overené</span></dd>
+    <dt>USP</dt><dd>Mačka si myslí, že dostáva pamlsok. Formát je čistejší ako oleje a prášky. Značka sa sama označuje za č. 1 a najrýchlejšie rastúcu značku mačacích suplementov v USA (vlastné tvrdenie). <span class="badge ok">Overené</span></dd>
+    <dt>Marketing</dt><dd>PhD výživár „in-house“, „vet-approved“, štatistiky typu 9/10 mačiek, silná retailová distribúcia (Target, Petco, PetSmart).</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Najbližšia obdoba DogMama v mačacom svete: suplement v tvare pamlsku, SKU podľa problému. Dual-texture formát je odpoveďou na vyberavosť mačiek.</div>
+</div>
+
+<!-- 5 Zesty Paws -->
+<div class="card brand">
+  <h3>5. Zesty Paws <span class="small">· USA (H&amp;H Group)</span></h3>
+  <div class="meta"><span class="tag">suplementy</span><span class="tag">mousse lízatká</span><span class="tag">už v EÚ</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.chewy.com/zesty-paws-digestion-gut-health/dp/1053870">Digestion Mousse</a> · <a href="https://www.petsmart.com/cat/vitamins-and-supplements/multivitamins/zesty-paws-8-in-1-multivitamin-cat-mousse-with-alaskomega-fish-oil-and-omega-3-fatty-acid-90184.html">8-in-1 Multivitamin</a> · <a href="https://www.zooplus.de/shop/katzen/katzensnacks/pasten_cremes/2325818">Digestion Paste na zooplus.de</a></dd>
+    <dt>Ceny</dt><dd>14 ks mousse $16,47–17,99. Na zooplus.de pasta €12,99–24,49. <span class="badge ok">Overené</span></dd>
+    <dt>Pozor</dt><dd>Niektoré lízatká majú na Chewy slabé hodnotenie (Hairball Mousse 3,3/5), recenzenti píšu, že ich mačky odmietajú. <span class="badge ok">Overené</span> Pre teba to znamená povinný test chutnosti pred launchom.</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Potvrdzuje, že formát „suplement ako lízatko“ funguje v mase. Zároveň je to potenciálny priamy konkurent v strednej Európe cez zooplus.</div>
+</div>
+
+<!-- 6 Native Pet -->
+<div class="card brand">
+  <h3>6. Native Pet <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">suplementy</span><span class="tag">psia značka → mačky</span></div>
+  <dl class="dl">
+    <dt>Info</dt><dd><a href="https://www.petfoodprocessing.net/articles/20948-native-pet-unveils-first-line-of-cat-supplements">launch 09/2026</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Native%20Pet&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Produkty</dt><dd>5 denných suplementov: Hairball, Multivitamin, Probiotic, Immune, Calm. Kuracie chews s dvojitou textúrou, NASC pečať. Predáva sa na nativepet.com a od 19. 10. 2026 v Petcu. <span class="badge ok">Overené</span></dd>
+    <dt>Marketing</dt><dd>„Clean label“. Launch odôvodnili tým, že si ho majitelia mačiek roky pýtali v komentároch.</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Je to presne scenár „DogMama → mačky“. Psia suplementová značka po rokoch rozširuje rovnaký formát na mačky. Varovanie aj príležitosť: DogMama to môže urobiť sama.</div>
+</div>
+
+<!-- 7 Made by Nacho -->
+<div class="card brand">
+  <h3>7. Made by Nacho <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">krmivo</span><span class="tag">vývary / toppery</span><span class="tag">celebrity + mačka-persona</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.chewy.com/made-by-nacho-turkey-bone-broth-grain/dp/986870">Bone broth topper</a> · <a href="https://walmart.com/brand/madebynacho/20048482">značka na Walmarte</a></dd>
+    <dt>USP</dt><dd>Šéfkuchár Bobby Flay a jeho mainská mývalia mačka Nacho, ktorá „značku sama založila“. Charakteristická ingrediencia je vývar (hydratácia), granule s mrazom sušenou pečeňou, toppery. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Ukážka značky postavenej na <b>persone mačky</b>. Komunikácia z pohľadu mačky je lacný a silný obsahový motor aj na lokálnom trhu.</div>
+</div>
+
+<!-- 8 Cat Person -->
+<div class="card brand">
+  <h3>8. Cat Person <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">krmivo</span><span class="tag">doplnky</span><span class="tag">len mačky</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.chewy.com/cat-person-by-weruva-chicken-turkey/dp/3310054">granule Chicken &amp; Turkey</a></dd>
+    <dt>Info</dt><dd>Založená v roku 2020 s tímom za značkou Weruva. Krmivo, pamlsky aj dizajnové doplnky. Zakladatelia pri prieskume zistili, že majitelia mačiek často kupujú veci navrhnuté pre malé psy. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Silný argument „cat-first“, teda nie „pet“ produkt. Tento rozdiel môžeš použiť aj v SK komunikácii.</div>
+</div>
+
+<!-- 9 Tuft+Paw -->
+<div class="card brand">
+  <h3>9. Tuft + Paw <span class="small">· Kanada</span></h3>
+  <div class="meta"><span class="tag">dizajnový nábytok</span><span class="tag">stelivo</span><span class="tag">SEO / obsah</span></div>
+  <dl class="dl">
+    <dt>E-shop</dt><dd><a href="https://www.tuftandpaw.com/collections/cat-furniture">Cat furniture</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Tuft%20%2B%20Paw&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Čísla</dt><dd>Podľa Starter Story (2022) 1,3 M $ mesačne, 40 % hrubá marža, bez externého kapitálu. Rastové kanály: SEO, Instagram, TikTok. <span class="badge ok">Overené</span></dd>
+    <dt>USP</dt><dd>Nábytok navrhujú dizajnéri s behavioristom, testuje sa v mačacích kaviarňach. 50 % zľava pri kúpe pre útulok. Shopify blog obsah zvýšil konverziu o 13 % (case study Shogun). <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Ukážka, ako postaviť značku pre <b>skupinu ľudí</b> („cat people“), nie okolo jedného produktu. Inšpirácia pre doplnkový „halo“ sortiment a obsahovú stratégiu.</div>
+</div>
+
+<!-- 10 Hepper -->
+<div class="card brand">
+  <h3>10. Hepper <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">dizajnové potreby</span><span class="tag">content commerce</span></div>
+  <dl class="dl">
+    <dt>Produkt</dt><dd><a href="https://www.hepper.com/products/hepper-nest-cat-bed/">Nest Cat Bed $59,50</a>, Pod Bed, NomNom miska, škrabadlá. <span class="badge ok">Overené</span></dd>
+    <dt>Model</dt><dd>Okrem e-shopu prevádzkuje obsahové weby s veterinárnym tímom (Catster, PangoVet, Dogster). Vlastné produkty v nich vychádzajú ako „Best Overall“ v recenziách. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Obsahový „flywheel“: edukačný web o zdraví mačiek privádza organickú návštevnosť do vlastného e-shopu. Na SK/CZ (malá konkurencia v obsahu) je to lacný kanál. <span class="badge est">Odhad</span></div>
+</div>
+
+<!-- 11 Basepaws -->
+<div class="card brand">
+  <h3>11. Basepaws <span class="small">· USA (Zoetis)</span></h3>
+  <div class="meta"><span class="tag">diagnostika</span><span class="tag">DNA</span><span class="tag">dentálny test</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://checkout.basepaws.com/products/cat-oral-health-test">Oral Health Test $99</a> · Breed + Health DNA $159. Zoetis firmu kúpil v roku 2022. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Na rozbeh nie, ale je to zaujímavý model „test → odporúčanie → produkt“. Neskôr ho môžeš napodobniť jednoduchým online kvízom, ktorý odporučí SKU.</div>
+</div>
+
+<!-- 12 Kitty Poo Club -->
+<div class="card brand">
+  <h3>12. Kitty Poo Club <span class="small">· USA</span></h3>
+  <div class="meta"><span class="tag">toaleta + stelivo</span><span class="tag">predplatné</span></div>
+  <dl class="dl">
+    <dt>Info</dt><dd><a href="https://kittypooclub.com/about/our-story">Our story</a>. Mesačne doručovaná toaleta z recyklovaného kartónu so stelivom z prírodných materiálov („all-in-one“). <span class="badge ok">Overené</span> Ceny som neoveril.</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Rieši najnenávidenejšiu časť vlastníctva mačky ako službu. Ukážka, že predplatné môže stáť aj na pohodlí, nielen na zdraví.</div>
+</div>
+
+<!-- 13 Scrumbles -->
+<div class="card brand">
+  <h3>13. Scrumbles <span class="small">· Veľká Británia (entita EÚ v NL)</span></h3>
+  <div class="meta"><span class="tag">krmivo</span><span class="tag">črevné zdravie</span><span class="tag">psy aj mačky</span></div>
+  <dl class="dl">
+    <dt>E-shop</dt><dd><a href="https://scrumbles.co.uk/collections/natural-cat-food">Natural cat food</a> · <a href="https://www.ocado.com/products/scrumbles-dry-cat-food-grain-free-sensitive/657150011">Sensitive+ 700 g £7,50</a></dd>
+    <dt>USP</dt><dd>Každá receptúra je postavená na „gut health“, granule obsahujú 1 mld. živých baktérií. Hravý tón („pickupable poops“), predplatné -10 % navždy, darovanie útulkom. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Celá značka je postavená na jednom benefite (trávenie) a podáva ho s humorom, presne ako vie DogMama.</div>
+</div>
+
+<!-- 14 Karnlea -->
+<div class="card brand">
+  <h3>14. Karnlea <span class="small">· Severné Írsko</span></h3>
+  <div class="meta"><span class="tag">funkčné toppery</span><span class="tag">len pre mačky</span><span class="tag">vývary</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.durhamanimalfeeds.co.uk/product/karnlea-mobility-joint-care-cat-100g">Mobility Joint Care Cat 100 g £12,99</a> (rozriedi sa až na 3 l). Päť funkčných topperov: srsť, pohyb, pokoj, výživa, hydratácia. Mäsový základ bez „zbytočných“ rastlín. <span class="badge ok">Overené</span></dd>
+    <dt>Marketing</dt><dd>Zakladateľka hovorí o vlne investícií do zdravia mačiek. Uvedenie na Cat Show Live.</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Malá lokálna značka, ktorá vstúpila do mačacích suplementov formátom práškového vývaru (nízka logistika, dlhá trvanlivosť). Realistická mierka pre SK štart.</div>
+</div>
+
+<!-- 15 PetLab -->
+<div class="card brand">
+  <h3>15. PetLab Co. <span class="small">· UK / USA</span></h3>
+  <div class="meta"><span class="tag">suplementy</span><span class="tag">predplatné</span><span class="tag">performance</span></div>
+  <dl class="dl">
+    <dt>E-shop</dt><dd><a href="https://thepetlabco.com/collections/cat-products">Cat products</a> (probiotiká, dentálny prípravok, lososové pamlsky) · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=PetLab%20Co&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Marketing</dt><dd>Predplatné až -40 %, citát veterinárky, „as seen on“ sponzorovaný obsah, aplikácia s exkluzívnymi dealmi, deklarovaných 100 000 päťhviezdičkových recenzií. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Učebnica performance DTC suplementov (advertoriály, listicle landing pages). Mačky sú tu zatiaľ len doplnok k psom, čo ukazuje medzeru.</div>
+</div>
+
+<!-- 16 Pets Deli -->
+<div class="card brand">
+  <h3>16. Pets Deli <span class="small">· Nemecko (Berlín)</span></h3>
+  <div class="meta"><span class="tag">funkčné polievky</span><span class="tag">krémové snacky</span><span class="tag">DTC + drogérie</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.dm.de/p/d/3070853/">Functional Suppe Multipack 6×40 g €6,25</a> (Beauty losos, Digest kura, Anti-Hairball hovädzie) · <a href="https://www.dm.de/p/d/1635217/">Cremesnack s hrebenatkou 6×15 g €3,15</a>. <span class="badge ok">Overené</span></dd>
+    <dt>USP</dt><dd>Polievky s ~93 % vlhkosti, ktoré podporujú pitný režim, každá s funkčným komplexom. Taurín z hrebenatky.</dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Najbližší európsky príklad „funkčného pamlsku pre mačky“ z DTC značky, ktorá prerazila aj do dm a Rossmannu. dm a Rossmann sú aj na SK/CZ, takže je to cesta do retailu.</div>
+</div>
+
+<!-- 17 Strayz -->
+<div class="card brand">
+  <h3>17. Strayz <span class="small">· Nemecko</span></h3>
+  <div class="meta"><span class="tag">bio krmivo</span><span class="tag">social impact</span><span class="tag">dizajn</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.zooplus.de/shop/katzen/katzensnacks/strayz/1751910">Bio Suppe (hydratácia) od €0,99</a> · bio kapsičky a konzervy. <span class="badge ok">Overené</span></dd>
+    <dt>Marketing</dt><dd>Tri zakladateľky, jedna z nich prišla z Oatly. Obal nevyzerá ako krmivo (papierové vrecko, kreslená mačka), časť tržieb ide na pouličné mačky. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Ukážka, ako „love brand“ taktiky z potravín (Oatly) prenesené na mačky vytvoria odlíšenie na regáli aj na sociálnych sieťach.</div>
+</div>
+
+<!-- 18 Treatsy -->
+<div class="card brand">
+  <h3>18. Treatsy <span class="small">· Belgicko / Francúzsko (výroba v EÚ)</span></h3>
+  <div class="meta"><span class="tag">veterinárne suplementy</span><span class="tag">soft chews</span><span class="tag">vet kanál</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.zooplus.de/shop/katzen/katzenfutter_ergaenzung/haarballen/9980078812">Probiotiká pre mačky 120 ks €29,99</a> · <a href="https://www.zooplus.de/shop/katzen/katzenfutter_trockenfutter/halbfeucht_weich/9980079618">Stress &amp; Urinary</a> (L-tryptofán, alfa-kazozepín, konopný olej, omega-3). <span class="badge ok">Overené</span></dd>
+    <dt>USP</dt><dd>Formuluje veterinárna výživárka, deklarovaná akceptácia 84 % u mačiek, plechovky s nekonečnou recykláciou, dve línie (Veterinary pre ambulancie, Daily Defence pre pet shopy). <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Európsky benchmark ceny a formulácie. Najmä produkt <b>Stres + močové cesty</b> ukazuje, ako spojiť dva súvisiace problémy (idiopatická cystitída súvisí so stresom) do jedného silného SKU.</div>
+</div>
+
+<!-- 19 Caats -->
+<div class="card brand">
+  <h3>19. Caats <span class="small">· Francúzsko</span></h3>
+  <div class="meta"><span class="tag">personalizované krmivo</span><span class="tag">predplatné</span><span class="tag">len mačky</span></div>
+  <dl class="dl">
+    <dt>Info</dt><dd><a href="https://www.maddyness.com/?p=1393614">Maddyness – financovanie</a> · <a href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=FR&q=Caats&search_type=keyword_unordered">Ads</a></dd>
+    <dt>Fakty</dt><dd>Založená v roku 2020, „pure player“ len pre mačky. Granule a kapsičky na mieru, 15-dňový skúšobný kit, predplatné od cca €21/mes. Získali €4 M a €5 M od Otium, zakladateľ uvádza, že model je ziskový. Veterinárka ju opisuje ako veľmi aktívnu na webe a sociálnych sieťach. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Dôkaz, že aj v strednej Európe (nie len USA/UK) funguje ziskový DTC model postavený výlučne na mačkách.</div>
+</div>
+
+<!-- 20 Japhy -->
+<div class="card brand">
+  <h3>20. Japhy <span class="small">· Francúzsko</span></h3>
+  <div class="meta"><span class="tag">personalizované granule</span><span class="tag">psy aj mačky</span></div>
+  <dl class="dl">
+    <dt>Info</dt><dd><a href="https://www.presse-citron.net/la-startup-japhy-leve-7me-pour-son-abonnement-de-croquettes-par-internet/">Series A €7 M</a>. Receptúra sa počíta algoritmom podľa veku, váhy a kastrácie, výroba vo Francúzsku (Mayenne), v ponuke aj suplementy. Mačacia rada je menšia ako psia. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Personalizačný kvíz ako vstupná brána do predplatného. Ten istý mechanizmus sa dá použiť na odporúčanie suplementu.</div>
+</div>
+
+<!-- 21 Glufs -->
+<div class="card brand">
+  <h3>21. Glufs <span class="small">· Švédsko</span></h3>
+  <div class="meta"><span class="tag">krmivo</span><span class="tag">mušle</span><span class="tag">udržateľnosť</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.apotea.se/glufs-musselmeow-1-kg">Musselmeow 1 kg 249 SEK</a>, krmivo s nordickými mušľami a riasami. Pre psov má aj prášok z mušlí (279 SEK/80 g). Projekt podporil Vinnova. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Odlíšenie cez jednu „superfood“ surovinu s príbehom (mušľa = prírodný glukozamín a omega-3). Pri SK značke by tú istú úlohu mohla hrať lokálna surovina.</div>
+</div>
+
+<!-- 22 Bell & Bone -->
+<div class="card brand">
+  <h3>22. Bell &amp; Bone <span class="small">· Austrália</span></h3>
+  <div class="meta"><span class="tag">dentálne pamlsky</span><span class="tag">psia značka → mačky</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.petbarn.com.au/bell-bone-dental-bites-salmon-cat-treat-80g">Dental Bites Salmon 80 g AU$12,99</a>, 40 % mäsa, morská riasa A. nodosum. Pôvodne dentálne tyčinky pre psov, mačaciu radu spustili v roku 2024. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Ďalší príklad psej funkčnej značky, ktorá rozšírila overený benefit na mačky.</div>
+</div>
+
+<!-- 23 Wonderfur -->
+<div class="card brand">
+  <h3>23. Wonderfur <span class="small">· Austrália</span></h3>
+  <div class="meta"><span class="tag">funkčné bites</span><span class="tag">startup</span></div>
+  <dl class="dl">
+    <dt>Info</dt><dd><a href="https://insidesmallbusiness.com.au/latest-news/australian-start-up-launches-healthy-dried-food-for-pets">Inside Small Business</a>. Startup, ktorý po dvoch rokoch vývoja (2024) uviedol suplementy „Bites“ na konkrétne zdravotné potreby mačiek aj psov. Ceny som neoveril. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Malý brand v ranej fáze, porovnateľný s DogMama v roku 2023.</div>
+</div>
+
+<!-- 24 Churu -->
+<div class="card brand">
+  <h3>24. Inaba – CIAO Churu <span class="small">· Japonsko</span></h3>
+  <div class="meta"><span class="tag">lízacie pyré</span><span class="tag">tvorca kategórie</span><span class="tag">už na SK/CZ</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.rohlik.cz/1469158-inaba-churu-cat-snack-hairball-kure-4-14-g">Churu Hairball (vláknina + chitosan) na Rohlik.cz</a> · <a href="https://www.lekarna.cz/pochoutky/?forma=krem">Lékárna.cz 4×14 g 62 Kč</a> · <a href="https://www.dogdogcat.com/products/inaba-churu-indoor-care-ckn-seafood-var-box-60pk-30oz">Indoor Care 60 ks $49,99</a></dd>
+    <dt>Fakty</dt><dd>Churu je na trhu od roku 2012 a patrí medzi najpredávanejšie mačacie pamlsky na svete. V USA dosiahol 20 M $ tržieb 5 rokov po uvedení (údaj z roku 2022). <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Churu naučil trh lízať z tuby. V CZ ho predávajú Rohlík aj lekárne. Prémiová DTC značka nemusí kategóriu vysvetľovať, stačí povedať „ako Churu, ale s reálnym benefitom“.</div>
+</div>
+
+<!-- 25 Necoichi -->
+<div class="card brand">
+  <h3>25. Necoichi <span class="small">· Japonsko</span></h3>
+  <div class="meta"><span class="tag">ergonomické misky</span><span class="tag">dizajn</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://www.chewy.com/necoichi-tilted-stress-free-raised/dp/383345">Tilted Raised Bowl Sakura $34,99</a> · <a href="https://www.chewy.com/necoichi-ceramic-elevated-cat-food/dp/146160">Ceramic Elevated $15,99</a>. Zdvihnutá miska naklonená o 15° proti „únave fúzov“, bolesti krku a zvracaniu. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Hodí sa ako doplnkový produkt so zdravotným argumentom (zvracanie). Zvyšuje hodnotu košíka a dobre sa ukazuje v UGC.</div>
+</div>
+
+<!-- 26 Catlog -->
+<div class="card brand">
+  <h3>26. Catlog (RABO, Inc.) <span class="small">· Japonsko</span></h3>
+  <div class="meta"><span class="tag">smart obojok</span><span class="tag">AI</span><span class="tag">predplatné aplikácie</span></div>
+  <dl class="dl">
+    <dt>Produkty</dt><dd><a href="https://rabo.cat/en/lp">Catlog collar + Catlog Board</a>. Obojok za ¥14 850 meria jedenie, pitie, spánok a čistenie. AI vyhodnocuje stres z dát o viac ako 46 000 mačkách. Dostupné v JP, USA a AU. <span class="badge ok">Overené</span></dd>
+  </dl>
+  <div class="why"><b>Prečo je relevantná:</b> Ako produkt na štart nie. Ukazuje ale, že starnutie mačiek a monitoring zdravia sú silný trend, na ktorý sa dá napojiť komunikáciou („senior“ rada).</div>
+</div>
+
+<p class="small">Ďalšie zaujímavé signály: <a href="https://www.petfoodindustry.com/cbd-treats-for-dogs-and-cats/news/15737618/kradle-launches-cat-wellness-products">Kradle</a> (USA) spustil „Cat Wellness Licks“ na močové cesty a pokožku; kórejská <a href="https://www.prnewswire.com/news-releases/aris-purrfect-introduces-its-feline-first-wellness-brand-at-catcon-302906730.html">Ari's Purrfect</a> (Yuyu Pharma) vstupuje na trh v USA ako „feline-first“ wellness značka.</p>
+
+<!-- ============ B ============ -->
+<h2 id="b">B. Top 10 produktových konceptov</h2>
+<p>Bodovanie 1–5 (5 = najlepšie) je <span class="badge est">Odhad</span> na základe zisteného researchu. Pri „konkurencii“ 5 znamená <i>nízku</i> konkurenciu na SK/CZ, pri „logistike“ 5 znamená <i>jednoduchú</i> logistiku.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Koncept</th><th>Potenciál SK/CZ</th><th>Konkurencia</th><th>Originalita</th><th>Značka</th><th>Marža</th><th>Retencia</th><th>Logistika</th><th>Odlíšenie</th><th>Spolu</th></tr></thead>
+<tbody>
+<tr><td><b>1. Funkčné lízatká s aktívnymi látkami</b></td><td class="num">5</td><td class="num">4</td><td class="num">4</td><td class="num">5</td><td class="num">4</td><td class="num">5</td><td class="num">4</td><td class="num">4</td><td class="total">35</td></tr>
+<tr><td><b>2. Stres + močové cesty (hero SKU)</b></td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">5</td><td class="num">4</td><td class="num">5</td><td class="num">5</td><td class="total">35</td></tr>
+<tr><td><b>3. Denné dual-texture chews („mačacie vitamlsky“)</b></td><td class="num">5</td><td class="num">3</td><td class="num">3</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">4</td><td class="total">35</td></tr>
+<tr><td><b>4. Funkčné práškové toppery / vývar v prášku</b></td><td class="num">3</td><td class="num">4</td><td class="num">3</td><td class="num">4</td><td class="num">5</td><td class="num">4</td><td class="num">5</td><td class="num">3</td><td class="total">31</td></tr>
+<tr><td><b>5. Hydratačné funkčné polievky</b></td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">3</td><td class="num">4</td><td class="num">3</td><td class="num">4</td><td class="total">30</td></tr>
+<tr><td><b>6. Stelivo indikujúce zdravie (pH)</b></td><td class="num">3</td><td class="num">4</td><td class="num">4</td><td class="num">3</td><td class="num">3</td><td class="num">5</td><td class="num">2</td><td class="num">4</td><td class="total">28</td></tr>
+<tr><td><b>7. Čerstvé krmivo na predplatné</b></td><td class="num">3</td><td class="num">5</td><td class="num">3</td><td class="num">5</td><td class="num">2</td><td class="num">5</td><td class="num">1</td><td class="num">4</td><td class="total">28</td></tr>
+<tr><td><b>8. Personalizované granule na predplatné</b></td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">4</td><td class="num">3</td><td class="num">5</td><td class="num">3</td><td class="num">3</td><td class="total">27</td></tr>
+<tr><td><b>9. Dentálne pamlsky</b></td><td class="num">3</td><td class="num">2</td><td class="num">2</td><td class="num">3</td><td class="num">4</td><td class="num">4</td><td class="num">5</td><td class="num">2</td><td class="total">25</td></tr>
+<tr><td><b>10. Dizajnové doplnky (misky, toalety)</b></td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">4</td><td class="num">4</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="total">23</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>1. Funkčné lízatká</h3>
+    <p><b>Vzory:</b> Smalls Licks ($24 / 24 vreciek), Zesty Paws Mousse ($16,47–17,99 / 14 ks), Pet Honesty Squeezables, Churu Indoor Care, Kradle Licks. <span class="badge ok">Overené</span></p>
+    <p><b>Benefity:</b> chlpové gule a trávenie (psyllium, inulín, probiotiká), srsť (omega-3, biotín, zinok), pokoj (L-tryptofán), pitný režim, imunita, senior.</p>
+    <p><b>Prečo:</b> mačky lízatká milujú. Trh už pozná Churu a kategóriu netreba vysvetľovať. Denná dávka znamená vysokú retenciu. Lízatko sa dá použiť aj na podanie tabletky. Analýza trendov od PetfoodIndustry označuje hydratačné lízatká a „pour-over“ formáty za trend, ktorý treba sledovať. <span class="badge ok">Overené</span></p>
+    <p><b>Cena (odhad):</b> 0,80–1,00 €/ks, teda 30 ks za 24,99–29,99 €. Churu v CZ stojí ~0,60 €/ks bez funkčného benefitu. <span class="badge est">Odhad</span></p>
+  </div>
+  <div class="card">
+    <h3>2. Stres + močové cesty</h3>
+    <p><b>Vzor:</b> Treatsy Stress &amp; Urinary (L-tryptofán, alfa-kazozepín, omega-3, konopný olej, 120 ks). <span class="badge ok">Overené</span></p>
+    <p><b>Prečo:</b> Je to konkrétny, bolestivý a drahý problém (opakované návštevy veterinára, čúranie mimo toalety). Hodí sa na príbeh „problém → riešenie“ a na spoluprácu s veterinármi. Spúšťače sú sezónne a situačné (sťahovanie, Silvester, nové zviera), čo dáva prirodzené kampane. <span class="badge est">Odhad</span></p>
+  </div>
+  <div class="card">
+    <h3>3. Denné dual-texture chews</h3>
+    <p><b>Vzory:</b> Pet Honesty ($14,99–15,99 / 3,7 oz), Native Pet (5 SKU), Treatsy (€29,99 / 120 ks). <span class="badge ok">Overené</span></p>
+    <p><b>Prečo:</b> Najbližšie k DogMama modelu, takže sa dá prevziať jej SKU architektúra aj marketing. Riziko je akceptácia, Treatsy uvádza 84 % u mačiek oproti 96 % u psov. Lokálny konkurent je Brit Care Snack (Dental, Calming, Superfruits). <span class="badge ok">Overené</span></p>
+  </div>
+  <div class="card">
+    <h3>4.–5. Toppery a polievky</h3>
+    <p><b>Vzory:</b> Karnlea (£12,99 / 100 g prášku), Pets Deli Functional Suppe (€6,25 / 6×40 g), Strayz Bio Suppe, Made by Nacho vývary. <span class="badge ok">Overené</span></p>
+    <p><b>Prečo:</b> prášok má najvyššiu maržu a najjednoduchšiu logistiku. Polievka má najsilnejší argument „mačka málo pije“, ale je ťažšia a s nižšou maržou. Vhodné ako druhá vlna alebo bundle. <span class="badge est">Odhad</span></p>
+  </div>
+  <div class="card">
+    <h3>6.–8. Stelivo a krmivo</h3>
+    <p>PrettyLitter, KatKin, Smalls, Caats a Japhy dokazujú obrovské LTV, ale vyžadujú vlastnú alebo zmluvnú výrobu krmiva, chladový reťazec (fresh) alebo ťažkú logistiku (stelivo). Na SK/CZ štart s obmedzeným kapitálom sú menej vhodné. <span class="badge est">Odhad</span></p>
+  </div>
+  <div class="card">
+    <h3>9.–10. Dentál a dizajn</h3>
+    <p>Dentálne pamlsky už pokrýva Brit Care Dental aj Vitakraft. Dizajnové doplnky (Necoichi, Hepper, Tuft + Paw) majú nízku opakovanosť nákupu, ale fungujú ako „halo“ produkty a zvyšujú AOV. <span class="badge est">Odhad</span></p>
+  </div>
+</div>
+
+<!-- ============ C ============ -->
+<h2 id="c">C. Top 5 značiek s najlepším marketingom</h2>
+
+<div class="card brand">
+  <h3>1. KatKin: edukácia s „nepriateľom“</h3>
+  <ul class="tight">
+    <li><b>Landing pages podľa uhla:</b> „cat food industry is broken“, „value comparison“, „cheap cat food is costing you“. Každá rieši jednu námietku (cena, zloženie, vyberavosť). <a href="https://www.katkin.com/lp/value-comparison-20">príklad</a></li>
+    <li><b>Porovnávacie tabuľky:</b> cena za deň a % mäsa oproti konkrétnym konkurentom (Lily's Kitchen, Gourmet). Pred/po fotky misky „KatKin vs. generické krmivo“.</li>
+    <li><b>Sociálny dôkaz v číslach:</b> počet mačiek, počet jedál, % majiteľov, ktorí vidia zlepšenie, recenzie na Trustpilote.</li>
+    <li><b>Kreatívy:</b> testimonial „vyberavá mačka teraz dojedá“, humorný dialóg animovaných mačiek proti granulám, stále aktívny hook so zľavou 20 %. Archív: <a href="https://adlibrary.com/brands/katkin">adlibrary.com</a>, <a href="https://admanage.ai/ad-library/katkin">admanage.ai</a>, <a href="https://library.motionapp.com/katkin">Motion</a>.</li>
+    <li><b>Autorita:</b> TV veterinár ako ambasádor, vlastný vedecký tím, veterinárna linka 7 dní v týždni.</li>
+  </ul>
+  <div class="why"><b>Na prevzatie:</b> 3–4 landing pages podľa problému. Porovnanie „cena na deň“ s lacnou konkurenciou. Číselný dôkaz hneď nad zlomom stránky.</div>
+</div>
+
+<div class="card brand">
+  <h3>2. Smalls: mačacia kultúra ako médium</h3>
+  <ul class="tight">
+    <li>Od 0 na 100 M $ ročne za menej ako dekádu. Reklamný rozpočet sa za 2 roky zoštvornásobil. <span class="badge ok">Overené</span></li>
+    <li><b>Diverzifikácia médií:</b> pred iOS14 mali na Meta menej ako 30 % rozpočtu, po škálovaní viac ako 60 %. <span class="badge ok">Overené</span></li>
+    <li><b>Kreatívny uhol:</b> „mačky sú druhoradé za psami“, mačací humor, prémiová cena ako prejav lásky.</li>
+    <li><b>Vstupná ponuka:</b> -50 % prvý box a pamlsky zadarmo navždy (retenčný háčik). <span class="badge ok">Overené</span></li>
+  </ul>
+  <div class="why"><b>Na prevzatie:</b> tón „konečne niečo len pre mačky“ a retenčný bonus viazaný na predplatné (napr. mesačné lízatko zadarmo).</div>
+</div>
+
+<div class="card brand">
+  <h3>3. PrettyLitter: founder-led a strach z neodhalenej choroby</h3>
+  <ul class="tight">
+    <li><b>Hook:</b> zakladateľ na kameru a osobný príbeh o mačke, ktorá zomrela na neodhalenú chorobu. <a href="https://inceptly-agency.beehiiv.com/p/why-this-founder-led-ad-born-from-a-sick-cat-is-pure-direct-response-gold">rozbor reklamy</a></li>
+    <li><b>TikTok influenceri</b> pre performance obsah, dedikovaný influencer manažér. <span class="badge ok">Overené</span></li>
+    <li><b>CRO:</b> landing pages pre každý kanál (Pinterest, Facebook, affiliate), konverzia vyššia o viac ako 35 % (Mayple case study). <span class="badge ok">Overené</span></li>
+    <li><b>Lojalita a referral</b> ako rastový motor (Friendbuy).</li>
+  </ul>
+  <div class="why"><b>Na prevzatie:</b> Veronika z DogMama (alebo zakladateľ novej značky) ako tvár reklám. Uhol „mačky skrývajú bolesť, odhaľ problém skôr“ funguje výborne pri močových cestách.</div>
+</div>
+
+<div class="card brand">
+  <h3>4. Pet Honesty: „myslí si, že je to pamlsok“</h3>
+  <ul class="tight">
+    <li>Jednoduchý insight: <b>suplement, ktorý mačka nevníma ako liek</b>. Formát je hlavný predajný argument.</li>
+    <li>Autorita v podobe PhD výživára, „vet-approved“, štatistiky prijatia typu „9/10 mačiek“.</li>
+    <li>Rýchle uvádzanie formátov (chews, lízatká) a silná retailová distribúcia popri DTC.</li>
+  </ul>
+  <div class="why"><b>Na prevzatie:</b> komunikovať <b>akceptáciu</b> ako USP a dať ju overiť testom (napr. „testované na 50 mačkách, X % zjedlo“).</div>
+</div>
+
+<div class="card brand">
+  <h3>5. Tuft + Paw: obsah a komunita</h3>
+  <ul class="tight">
+    <li>SEO a blogový obsah, ktorý zvýšil konverziu o 13 %. Instagram a TikTok ako hlavné kanály, behaviorista pri vývoji produktov. <span class="badge ok">Overené</span></li>
+    <li>Značka pre „cat people“ ako komunitu, nie pre produkt. Pomoc útulkom je súčasť modelu.</li>
+    <li>E-mail marketing s produktovými launchmi (nové stelivo, nové veže).</li>
+  </ul>
+  <div class="why"><b>Na prevzatie:</b> obsahový pilier „mačacie zdravie po slovensky“ a spolupráca s útulkami ako zdroj UGC aj PR.</div>
+</div>
+
+<div class="card">
+  <h3>Reklamné uhly, ktoré sa opakujú naprieč značkami <span class="badge est">Odhad</span></h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Uhol</th><th>Príklad hooku (SK)</th><th>Produkt</th></tr></thead>
+    <tbody>
+      <tr><td>Chlpové gule a zvracanie</td><td>„Zase zvracia na koberec? Toto nie je normálne.“</td><td>Hairball lízatko</td></tr>
+      <tr><td>Mačka málo pije</td><td>„Mačky prirodzene málo pijú. Tu je trik, ktorý vypije s radosťou.“</td><td>Hydratačné lízatko / polievka</td></tr>
+      <tr><td>Stres a čúranie mimo toalety</td><td>„Sťahovanie, Silvester, nová mačka… a zrazu čúra mimo toalety.“</td><td>Kľud + močové cesty</td></tr>
+      <tr><td>Vyberavec</td><td>„Odmieta všetko? Tento pamlsok si vylíže do dna.“</td><td>Celá rada (akceptácia)</td></tr>
+      <tr><td>Mačky skrývajú bolesť</td><td>„Mačka ti nepovie, že ju bolia kĺby.“</td><td>Senior / kĺby</td></tr>
+      <tr><td>Nepriateľ priemysel</td><td>„Prečo mačacie pamlsky obsahujú cukor a obilniny?“</td><td>Celá značka</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ============ D ============ -->
+<h2 id="d">D. Príležitosti pre slovenský a český trh</h2>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Čo už na SK/CZ existuje <span class="badge ok">Overené</span></h3>
+    <ul class="tight">
+      <li><b>Lízatká:</b> Churu vrátane Hairball variantu (Rohlík, Lékárna.cz, ~62 Kč / 4 ks), Ontario a Wanpy (lacné), Vitakraft Liquid Snack s taurínom a beta-glukánmi, Miamor Cat Cream Multivitamin (6×15 g ~73 Kč).</li>
+      <li><b>Funkčné pamlsky:</b> Brit Care Cat Snack (Dental, Calming, Superfruits) a Brit Raw Treat (Urinary, Hair &amp; Skin, Indoor &amp; Antistress). Brit je silná česká značka (VAFO), ktorá vyváža do 70 krajín.</li>
+      <li><b>Vitamíny a pasty:</b> Canvit (tablety, Nutrimin, Biotin), GimCat pasty (Malt, Multi-Vitamin, Relax), Cymedica, Zvolen (veterinárne pasty ProBio, SuperCoat, Lysine pre mačky), Purina FortiFlora.</li>
+      <li><b>Prenikajúci zahraniční hráči:</b> Zesty Paws a Treatsy na zooplus.de, Pets Deli a Strayz v dm a Rossmanne (DE).</li>
+    </ul>
+    <p class="small">Zdroje: <a href="https://www.lekarna.cz/pochoutky/">Lékárna.cz</a> · <a href="https://www.zbozi.cz/doplnky-stravy-pro-kocky/?vitaminy=ano">Zboží.cz</a> · <a href="https://cymedica.com/wp-content/uploads/2023/05/sk-mervue-brozura_dl_2023.pdf">Cymedica</a> · <a href="https://www.hornbach.cz/p/pamlsky-pro-kocky-brit-care-cat-snack-dental-50-g/6504743/">Brit Care Dental</a></p>
+  </div>
+  <div class="card">
+    <h3>Medzery na trhu <span class="badge est">Odhad</span></h3>
+    <ul class="tight">
+      <li><b>Neexistuje DTC „love brand“ pre mačky.</b> Všetko vyššie sú retailové, privátne alebo veterinárne značky bez storytellingu, predplatného, komunity a founder-led komunikácie. Funkčné mačacie produkty sa predávajú ako tovar, nie ako značka.</li>
+      <li><b>Žiadne lízatko s reálnou dávkou účinnej látky</b> a transparentným zložením na SK/CZ (Churu Hairball je skôr pamlsok s vlákninou).</li>
+      <li><b>Žiadny lokálny produkt „Stres + močové cesty“</b> pre bežného majiteľa mimo veterinárnej ambulancie.</li>
+      <li><b>Obsah v SK/CZ o zdraví mačiek</b> je slabý. Je tu SEO príležitosť à la Hepper.</li>
+      <li><b>Predplatné pre mačky na SK/CZ</b> som pri vyhľadávaní nenašiel.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Produkty etablované v zahraničí, bez špecializovaného hráča na SK/CZ <span class="badge est">Odhad</span></h3>
+    <ul class="tight">
+      <li>Funkčné lízatká ako denný suplement (Smalls Licks, Zesty Paws, Pet Honesty Squeezables)</li>
+      <li>Dual-texture chews pre mačky (Pet Honesty, Native Pet)</li>
+      <li>Kombinovaný produkt Stres + Urinary (Treatsy)</li>
+      <li>Funkčné hydratačné polievky (Pets Deli)</li>
+      <li>Práškové funkčné toppery len pre mačky (Karnlea)</li>
+      <li>Stelivo indikujúce pH na predplatné (PrettyLitter)</li>
+      <li>Čerstvé krmivo pre mačky na predplatné (KatKin, Smalls)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Regulácia a prax <span class="badge est">Overiť</span></h3>
+    <ul class="tight">
+      <li>V EÚ ide spravidla o <b>doplnkové krmivo</b> (nie liek) podľa nariadenia (ES) č. 767/2009. Tvrdenia sa musia formulovať ako „podpora“, nie „liečba“. Pri vybraných „diétnych“ účeloch (napr. močové cesty) platia osobitné pravidlá pre krmivá na osobitné výživové účely.</li>
+      <li>Registrácia prevádzkovateľa krmivárskeho podniku: na SK ÚKSÚP, v CZ ÚKZÚZ.</li>
+      <li>Zmluvná výroba lízatiek a soft chews v EÚ existuje (Treatsy, Pets Deli, Strayz vyrábajú v EÚ).</li>
+    </ul>
+    <p class="small">Tento blok je z vlastných znalostí, nie z researchu v tejto relácii. Pred launchom ho over s regulátorom alebo poradcom pre krmivá.</p>
+  </div>
+</div>
+
+<!-- ============ E ============ -->
+<h2 id="e">E. Vlastné odporúčanie</h2>
+<p>Keby som mal vybrať koncepty pre novú prémiovú DTC značku pre mačky na Slovensku (s presahom do CZ), sú to tieto tri, v tomto poradí:</p>
+
+<div class="grid2">
+  <div class="card rec">
+    <div class="n">1</div>
+    <h3>Funkčné lízatká ako hero formát</h3>
+    <p><b>Čo:</b> mačacie „vitamlsky“ v tube (12–15 g), 4 SKU podľa problému: <i>Chlpové gule &amp; trávenie</i>, <i>Pitný režim &amp; močové cesty</i>, <i>Srsť &amp; koža</i>, <i>Kľud</i>. Krabička 30 ks = mesačná zásoba, predplatné s pravidelným doručovaním.</p>
+    <p><b>Prečo:</b> má najvyššiu akceptáciu u mačiek, kategóriu na trhu už pozná vďaka Churu, denné užívanie zaručuje retenciu, logistika je nenáročná (malé, ľahké a trvanlivé balenie) a formát je vizuálne silný na UGC („lízanie z ruky“). Je to najbližší ekvivalent DogMama modelu, ktorý u mačiek reálne funguje.</p>
+    <p><b>Cena:</b> 24,99–29,99 € / 30 ks, mechanika 3+1 ako DogMama. <span class="badge est">Odhad</span></p>
+  </div>
+  <div class="card rec">
+    <div class="n">2</div>
+    <h3>Hero problém: stres + močové cesty</h3>
+    <p><b>Čo:</b> vlajkové SKU, okolo ktorého postavíš celú komunikáciu a landing page („mačka čúra mimo toalety?“). Ako lízatko aj ako soft chew, inšpirácia Treatsy.</p>
+    <p><b>Prečo:</b> problém je bolestivý a drahý, má prirodzené sezónne kampane (Silvester, sťahovanie, dovolenky) a dáva priestor na spoluprácu s veterinármi a behavioristami. Odlíši ťa od Brit, Churu aj Canvit, ktoré túto kombináciu bežným majiteľom nekomunikujú. <span class="badge est">Odhad</span></p>
+  </div>
+  <div class="card rec">
+    <div class="n">3</div>
+    <h3>Druhá vlna: denné dual-texture chews</h3>
+    <p><b>Čo:</b> po overení značky pridať chrumkavo-krémové chews (multivitamín, senior, probiotiká) s balením na 2–3 mesiace, rovnaká logika ako DogMama.</p>
+    <p><b>Prečo:</b> vyššia marža a ľahšia výroba, cross-sell k lízatkám. Najlepšie ich uviesť až keď máš komunitu, ktorá ich otestuje (akceptácia je riziko).</p>
+  </div>
+</div>
+
+<div class="callout">
+  <h3>Strategická poznámka k DogMama</h3>
+  <p>Native Pet v septembri 2026 a Bell &amp; Bone v roku 2024 urobili presne to, čo by teraz mohla urobiť DogMama: rozšírili overený psí formát na mačky. Sú dve cesty, ktoré sa dajú zvážiť: (a) <b>samostatná mačacia značka</b> s vlastnou identitou (mačací majitelia citlivo reagujú na „pet“ značky, pozri Cat Person, Smalls, Caats), alebo (b) <b>„CatMama“ sub-brand</b> s využitím existujúcej komunity a know-how. Pri vyhľadávaní som nenašiel, že by DogMama mala mačací sortiment. Ak ho neplánuje, je potenciálnym partnerom alebo konkurentom. <span class="badge est">Odhad</span></p>
+</div>
+
+<div class="card">
+  <h3>Praktický plán na prvých 90 dní <span class="badge est">Odhad</span></h3>
+  <ol class="tight">
+    <li><b>Výrobca:</b> osloviť 3–5 EÚ zmluvných výrobcov lízacích pyré a soft chews (CZ, PL, DE, IT). Pýtať sa na MOQ, receptúry s aktívnymi látkami a analýzy.</li>
+    <li><b>Test chutnosti:</b> 30–50 mačiek z komunity a útulkov, merať % zjedenia. Výsledok potom použiť ako marketingový claim („X z 10 mačiek…“).</li>
+    <li><b>MVP:</b> 2 SKU (Pitný režim &amp; močové cesty, Chlpové gule &amp; trávenie) a bundle. Shopify, predplatné (napr. Recharge alebo Seal), Heureka a Zboží.</li>
+    <li><b>Obsah:</b> 3 landing pages podľa problému (vzor KatKin), founder-led video (vzor PrettyLitter), 20+ UGC videí „lízanie z ruky“ od mikro-influencerov s mačkami.</li>
+    <li><b>Kanály:</b> Meta a TikTok ako primárne. Neskôr SEO obsah o zdraví mačiek a spolupráca s veterinármi (odporúčací kód).</li>
+    <li><b>KPI:</b> akceptácia nad 85 %, podiel predplatného nad 30 %, opakovaný nákup do 60 dní nad 40 %.</li>
+  </ol>
+</div>
+
+<!-- ============ METODIKA ============ -->
+<h2 id="metodika">Metodika a limity</h2>
+<ul class="tight">
+  <li>Research prebehol 13. 11. 2026 cez webové vyhľadávanie: e-shopy značiek, retaileri (Chewy, PetSmart, zooplus, dm, Rossmann, Ocado, Petbarn, Rohlík, Lékárna.cz), odborná tlač (PetfoodIndustry, Pet Food Processing, Inc., TechCrunch, Maddyness) a knižnice reklám.</li>
+  <li>Web DogMama sa nedal načítať priamo (blokovaný prístup). Údaje o DogMama sú z jej indexovaných stránok.</li>
+  <li>Instagram a TikTok handle značiek som jednotlivo neoveroval. Pri každej značke je namiesto toho odkaz na vyhľadávanie v Meta Ads Library, kde nájdeš jej oficiálne stránky aj aktívne reklamy.</li>
+  <li>Ceny sú orientačné, z dátumu researchu a z rôznych kanálov (vlastný e-shop aj retail). Bodovanie v sekcii B a všetko označené „Odhad“ je môj úsudok, nie fakt.</li>
+  <li>Absencia hráča na SK/CZ znamená „nenašiel som ho pri vyhľadávaní“, nie úplný prieskum trhu.</li>
+</ul>
+
+<footer>Pripravené pre Lukáša · research zahraničných DTC značiek pre mačky · 11/2026</footer>
+</div>
+</body>
+</html>
