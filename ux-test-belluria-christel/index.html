@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UX/UI usability test: Belluria.sk vs. Christel.sk</title>
+<style>
+:root{--ink:#1d1b1a;--muted:#6b6560;--line:#e6e1dc;--bg:#fbfaf8;--accent:#7a2d3b;--head:#f3efea}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:30px;line-height:1.2;margin:0 0 4px}
+h1+p{color:var(--muted);margin-top:0}
+h2{font-size:22px;margin:48px 0 12px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:32px 0 8px}
+strong{font-weight:650}
+.tw{overflow-x:auto;margin:12px 0 16px;border:1px solid var(--line);border-radius:8px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--head);font-weight:650;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+img{display:block;max-width:100%;height:auto;margin:20px 0 4px;border:1px solid var(--line);border-radius:8px;background:#fff}
+img+br,p:has(>img)+p{color:var(--muted);font-size:13px;margin-top:0}
+ul{padding-left:22px}
+code{background:var(--head);padding:1px 5px;border-radius:4px;font-size:13px}
+@media (max-width:640px){main{padding:24px 14px 60px}h1{font-size:24px}table{font-size:12.5px}}
+</style></head><body><main>
+<h1>UX/UI usability test: Belluria.sk vs. Christel.sk</h1>
+<ol>
+<li>
+<ol>
+<li>2026 · Lukas</li>
+</ol>
+</li>
+</ol>
+<h2>Rozsah testu</h2>
+<p>Testované 15. 11. 2026 v Chrome na desktope (1568 × 705 px) a v simulovanom mobile (390 px). Každý scenár som prešiel na oboch e-shopoch ako zákazník.</p>
+<ul>
+<li><strong>Vylúčené na tvoju žiadosť:</strong> checkout, vypredané produkty (chyba skladu) a oznam o úpravách na Christel. Košík je hodnotený, checkout nie.</li>
+<li><strong>Kliky</strong> sú počty z mojej cesty (hover sa nepočíta). <strong>Čas</strong> som spoľahlivo nemeral, preto ho neuvádzam.</li>
+<li><strong>Mobil:</strong> Belluria cez 390 px iframe (spoľahlivé). Christel cez 390 px náhľad bez plného JS, takže rozloženie výpisu produktov na mobile Christel je neisté.</li>
+<li><strong>Fakty vs. hypotézy:</strong> zistenia sú pozorované. Dopad na konverzie je odhad podľa UX princípov (Baymard, NN/g), nie meranie. Bez analytiky alebo A/B testu ho nemožno potvrdiť.</li>
+</ul>
+<h2>Executive summary</h2>
+<p><strong>Christel.sk je použiteľnejší: vážené skóre 7,0 / 10 oproti 6,1 / 10 pre Belluria.sk.</strong> Christel vyhral 9 z 15 scenárov, Belluria 4 a 2 skončili remízou.</p>
+<p>Christel vyhráva v tých častiach, ktoré rozhodujú o kúpe: v produktovom detaile a vo filtroch. Cena, varianty a CTA sú nad záhybom, na stránke je dátum doručenia a pri scrollovaní ostáva viditeľná lišta s tlačidlom do košíka. Filtre majú presný cenový rozsah, druh vône, dostupnosť a počty.</p>
+<p>Belluria má silný koncept objavovania: vyhľadávanie s návrhmi tónov a značiek, index značiek A–Z, sprievodcu výberom a klikateľnú vonnú pyramídu. Exekúcia ho však podrýva:</p>
+<ul>
+<li><strong>14 z 24 tónov v menu VÔNE vráti 0 produktov</strong> (napr. Bergamot, Levanduľa, Tonka). Ostatné vrátia 1–16 produktov, lebo ide o fulltext v názve, nie o dáta z pyramídy.</li>
+<li>Na PDP je cena aj CTA pod záhybom, chýba sticky CTA a všetky 4 polia „Charakter vône“ ukazujú „Neuvedené“.</li>
+<li>Filtre majú iba značku, 4 pevné cenové pásma a príznaky (akcia, bestseller). Chýba druh vône, dostupnosť aj objem.</li>
+</ul>
+<p>Christel má vlastné chyby, ktoré podkopávajú dôveru: v košíku je šablónový blok „You may also like“ so štyrmi produktmi „Príklad názvu produktu 19,99 €“ a suma „93,00 EUR €“. Tiež nemá index značiek, akcie v hlavičke ani wishlist.</p>
+<p><strong>Najväčší potenciál pre Belluria (P1):</strong> opraviť stránky tónov, posunúť nákupný box na PDP nahor a pridať sticky CTA, ukázať dátum a cenu doručenia a prebudovať filtre podľa vzoru Christel.</p>
+<h2>Celkové bodové porovnanie</h2>
+<p>Christel vedie o 0,9 bodu. Rozdiel tvorí hlavne produktový detail (+3) a filtre (+2). Belluria vedie iba vo výpise produktov (+0,5).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Oblasť</th>
+<th>Váha</th>
+<th>Belluria</th>
+<th>Christel</th>
+<th>Rozhodujúce pozorovania</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Navigácia a orientácia</td>
+<td>20 %</td>
+<td>6</td>
+<td>6</td>
+<td>B: bohaté mega menu a index značiek A–Z, ale nefunkčné tóny vo VÔNE a duplicity v taxonómii. C: čisté menu podľa pohlavia s bestsellermi, ale bez akcií, darčekov a značiek v hlavičke.</td>
+</tr>
+<tr>
+<td>Vyhľadávanie a filtre</td>
+<td>15 %</td>
+<td>6</td>
+<td>8</td>
+<td>B: výborný autocomplete (tóny, značky, „Mysleli ste?“), ale slabé filtre v zásuvke. C: filtre s počtami, druhom vône, dostupnosťou a presnou cenou, sémantické vyhľadávanie.</td>
+</tr>
+<tr>
+<td>Produktový výpis</td>
+<td>15 %</td>
+<td>7</td>
+<td>6,5</td>
+<td>B: veľké karty a rýchle pridanie do košíka, ale banner kategórie tlačí produkty pod záhyb. C: zľavy a odznaky, ale bez rýchleho pridania a s preplnenými odznakmi.</td>
+</tr>
+<tr>
+<td>Produktový detail</td>
+<td>20 %</td>
+<td>5</td>
+<td>8</td>
+<td>B: CTA pod záhybom, vodoznak cez produkt, 4× „Neuvedené“. C: nákupný box nad záhybom, dátum doručenia, sticky CTA, jednotková cena.</td>
+</tr>
+<tr>
+<td>Košík (bez checkoutu)</td>
+<td>20 %</td>
+<td>6</td>
+<td>6,5</td>
+<td>B: prehľadný, ale bez ceny dopravy a s 2-krokovým výberom darčeka. C: info o doprave zdarma a upsell, ale šablónové produkty a „EUR €“.</td>
+</tr>
+<tr>
+<td>Vizuálna hierarchia</td>
+<td>10 %</td>
+<td>7</td>
+<td>7</td>
+<td>B: konzistentná prémiová identita, drobné nízkokontrastné popisky. C: kontrastné CTA, ale veľa odznakov a prázdne miesta pri animáciách načítania.</td>
+</tr>
+<tr>
+<td><strong>Vážené skóre</strong></td>
+<td>100 %</td>
+<td><strong>6,1</strong></td>
+<td><strong>7,0</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Skóre som zaokrúhlil na desatiny (6,05 a 6,98). Body vyjadrujú moje hodnotenie, nie meranie. Opierajú sa však o konkrétne pozorovania uvedené v ďalších sekciách.</p>
+<h2>Výsledky nákupných scenárov</h2>
+<p><strong>Christel 9 výhier, Belluria 4, remíza 2.</strong> Belluria vyhráva tam, kde zákazník hľadá značku, akciu, darček alebo si chce produkty odložiť. Christel vyhráva pri filtrovaní, dostupnosti, doprave a rozhodovaní na PDP. Kliky sú z mojej cesty a hover sa nepočíta.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Scenár (štart)</th>
+<th>Belluria: cesta · kliky · výsledok</th>
+<th>Christel: cesta · kliky · výsledok</th>
+<th>Víťaz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Konkrétny parfum, Dior Sauvage EdP (HP)</td>
+<td>Viditeľné pole → autocomplete → produkt · 2 · áno, preklep „sauvge“ ponúkne „Mysleli ste Sauvage?“</td>
+<td>Ikona lupy → zásuvka → produkt · 2 · áno, preklep tichý, ale správny</td>
+<td>Remíza</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Pánske parfémy do 50 € (HP)</td>
+<td>Menu → Pánske → Filtre → 31–60 € → Zobraziť → 2 selecty radenia · 8 · čiastočne: hranicu 50 € nejde nastaviť a aktívny filter nie je vidieť</td>
+<td>Menu → Pánske → pole „do“ = 50 · 2 · áno, 171 z 380 a chip „€0 – €50 ×“</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Dámsky parfum na každodenné nosenie (HP)</td>
+<td>Sprievodca: Každý deň → Svieže → Do 100 € · 4 · čiastočne: 479 výsledkov aj s pánskymi, bez otázky na pohlavie</td>
+<td>Dámske → filter Druh vône (Svieža, Kvetinová… s počtami) · ~3 · áno, ale bez atribútu „na každý deň“</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Značka bez názvu produktu, Montblanc (HP)</td>
+<td>Značky → Parfumérske domy A–Z → M → Montblanc · 3 · áno</td>
+<td>Index značiek chýba, v menu je iba 6 top značiek. Vyhľadávanie alebo filter Značka · 2–3 · áno, ale iba ako zoznam produktov</td>
+<td>Belluria</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Najpredávanejšie parfémy (HP)</td>
+<td>Na HP nie sú. Kategória → Filtre → Najpredávanejšie → Zobraziť · 4 · áno, ale skryté</td>
+<td>Sekcia na HP (0), menu „Najpredávanejšie dámske/pánske“ (1), radenie · 0–1 · áno</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Porovnať dva podobné parfémy (PDP)</td>
+<td>Porovnanie chýba. Srdiečko (wishlist) a „Moja história“ · 1 na produkt · čiastočne</td>
+<td>Porovnanie ani wishlist nie sú, iba „Naposledy prezerané“ · – · čiastočne (karty v prehliadači)</td>
+<td>Belluria (tesne)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Darček pre ženu (HP)</td>
+<td>Parfémy → Dámske → Darčekové sady · 1 · áno (68 položiek), k objednávke darček zadarmo</td>
+<td>Hero „Vybrať vianočný darček“ vedie na všetky parfumy, nie na darčeky. Cez menu Dámske → Darčekové sady · 1 · áno</td>
+<td>Belluria</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Darčeková sada (HP)</td>
+<td>Menu → Darčekové sady podľa pohlavia · 1 · áno. Sady sa ukazujú aj na PDP pri variantoch</td>
+<td>Menu → Sortiment → Darčekové sady · 1 · áno (71). Sada aj v „Súvisiace produkty“ na PDP</td>
+<td>Remíza</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Cenové rozpätie 60–100 € (kategória)</td>
+<td>Filtre → 61–100 € → Zobraziť · 3 · áno, iba pevné pásma. Na HP sú chipy „Do 30/50/100/200 €“</td>
+<td>Dve polia od–do (alebo posuvník) · 2 · áno, presne</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Alternatíva k Baccarat Rouge 540 (HP)</td>
+<td>Vyhľadávanie „baccarat“ → 1 výsledok, cross-sell na PDP nesúvisí · – · nie</td>
+<td>„baccarat“ v návrhoch ukáže aj Club De Nuit Untold a Ana Abiyedh Rouge · 1 · áno, ale bez označenia „alternatíva“</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Je parfum skladom? (kategória)</td>
+<td>Iba na PDP „Na sklade“, na karte ani vo filtri nie · 1 · áno</td>
+<td>PDP „Skladom“ + dátum doručenia + osobný odber. Vo výpise filter Dostupnosť (napr. pánske do 50 €: Skladom 108 / Na objednávku 62) · 0–1 · áno</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Doprava a platba (HP)</td>
+<td>Pätička → stránka uvádza iba kuriéra 4,90 €. Lišta sľubuje „doručenie do 24 hodín“, stránka „do 2 pracovných dní od expedovania“ · 1 · čiastočne</td>
+<td>Dátum doručenia už na PDP. Stránky: Packeta 2,90 €, kuriér 4,90 €, ČR 6,90 €. Hranica dopravy zdarma nie je nikde uvedená · 0–1 · áno</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Akcia alebo zľava (HP)</td>
+<td>Menu Parfémy → Akcie, alebo HP „Zobraziť všetky akcie“ · 1 · áno (28)</td>
+<td>Hlavička ich nemá. Iba HP karusel „Zvýhodnená ponuka“ a pätička „Akciové“ · 1 + scroll na koniec · áno (45)</td>
+<td>Belluria</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Hlava, srdce, základ a výdrž (PDP)</td>
+<td>Vizuálna pyramída s časmi (15 min, 30 min). Výdrž, stopa, obdobie a príležitosť = „Neuvedené“ · 0 · čiastočne</td>
+<td>Tabuľka pyramídy, druh vône, koncentrácia, popis s parfumérom a použitím („Na deň aj na večer“) · 0 · áno, výdrž nie je ani tu</td>
+<td>Christel</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Z PDP do košíka (PDP)</td>
+<td>Scroll k CTA → Do košíka → Prejsť do košíka · 2 + scroll · áno</td>
+<td>Sticky „Pridať do košíka“ → Do košíka alebo K pokladni · 2 · áno, s informáciou o doprave zdarma</td>
+<td>Christel</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Detailné porovnanie častí</h2>
+<p>Belluria je silná v homepage a objavovaní. Christel je silný v PDP, filtroch a košíku. Pod každou tabuľkou je lepší e-shop pre danú časť.</p>
+<h3>A. Homepage</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Belluria</th>
+<th>Christel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hodnotová ponuka</td>
+<td>„Parfuméria od roku 2007“, 4 USP (100 % originály, darček zadarmo, vyzdvihnutie, rýchle doručenie) a pole vyhľadávania priamo v hero</td>
+<td>Sezónny hero „Darček, ktorý vonia výnimočne“, USP sú až na PDP</td>
+</tr>
+<tr>
+<td>Orientácia nového zákazníka</td>
+<td>Značky, rodiny vôní, filter „Nájdite svoj pocit“, cenové chipy, sprievodca</td>
+<td>Naposledy prezerané, Najpredávanejšie, Zvýhodnená ponuka, Novinky, články</td>
+</tr>
+<tr>
+<td>Bestsellery</td>
+<td>Sekcia chýba</td>
+<td>Sekcia s odznakom Bestseller</td>
+</tr>
+<tr>
+<td>Problémy</td>
+<td>Karty rodín vôní a „Objaviť kolekciu“ vedú na „/“, teda iba odscrollujú na sekciu na HP. Výsledok sa nedá zdieľať a chýba v ňom filter pohlavia</td>
+<td>CTA hero vedie na všetky parfumy, nie na darčeky. Sekcie sa pri scrolle napĺňajú animáciou, takže chvíľu sú prázdne. „Novinky“ obsahujú aj Sauvage</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lepšie: <strong>Belluria</strong> (jasnejšia ponuka a viac vstupov do objavovania), ale bez bestsellerov.</p>
+<h3>B. Hlavička a navigácia</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Belluria</th>
+<th>Christel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hlavné menu</td>
+<td>Parfémy, Kozmetika, Značky, Vône, Novinky</td>
+<td>Dámske, Pánske, Unisex parfumy</td>
+</tr>
+<tr>
+<td>Mega menu</td>
+<td>Pohlavie × typ (parfém, EdP, EdT, niche, novinky, sady). Značky zobrazujú iba prvých 15 abecedne (A–L). VÔNE má 24 tónov, z toho 14 vráti 0 produktov</td>
+<td>Najpredávanejšie, Novinky, Sortiment, 6 top značiek, Špeciálne ponuky, produkty „Výber zákazníkov“. Pri prvom hoveri sa na chvíľu zobrazí prázdny biely panel</td>
+</tr>
+<tr>
+<td>Taxonómia</td>
+<td>Duplicity: „Dezodoranty a antiperspiranty“ pod Parfémami a „Deodoranty“ pod Kozmetikou, darčekové sady na dvoch miestach, značky „Karl Lagerfeld“ aj „Lagerfeld“. Položka „Parfémy“ znamená koncentráciu aj celú kategóriu</td>
+<td>„parfumy“ v hlavičke a „parfémy“ v pätičke. Akcie, darčeky ani značky nie sú na prvej úrovni</td>
+</tr>
+<tr>
+<td>Vyhľadávanie, konto, košík</td>
+<td>Viditeľné pole so skratkou „/“, konto, wishlist, história, košík s počtom</td>
+<td>Iba ikony: lupa, konto, košík. Wishlist chýba</td>
+</tr>
+<tr>
+<td>Sticky hlavička</td>
+<td>Áno, stále viditeľná</td>
+<td>Pri scrolle nadol sa skrýva</td>
+</tr>
+<tr>
+<td>Mobil</td>
+<td>Hamburger s akordeónom. V hlavičke 5 ikon tesne vedľa seba</td>
+<td>Drill-down menu s bestsellermi a karuselom produktov. Toaletné vody sú až na 3. úrovni</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lepšie: <strong>remíza</strong>. Belluria má širší prístup k značkám a akciám, ale nefunkčné VÔNE. Christel je prehľadnejší, ale plytký.</p>
+<h3>C. Výpis produktov (PLP)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Belluria</th>
+<th>Christel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Karta</td>
+<td>Značka, názov, typ a objem, cena, „Do košíka“, srdiečko</td>
+<td>Značka, názov, typ, cena „od“, „Ušetríte X €“, odznaky. Rýchle pridanie chýba</td>
+</tr>
+<tr>
+<td>Fotky</td>
+<td>Veľké, jednotné, časť s vodoznakom Belluria</td>
+<td>Menšie, bez vodoznaku</td>
+</tr>
+<tr>
+<td>Odznaky</td>
+<td>Novinka, Akcia</td>
+<td>„Doprava zadarmo“ takmer na každej karte, takže stráca význam. K tomu Bestseller, Novinka, Ušetríte</td>
+</tr>
+<tr>
+<td>Filtre</td>
+<td>Zásuvka z ľavej strany, hoci tlačidlo je vpravo. Príznaky, značka (s vyhľadávaním), 4 cenové pásma (radio). Aplikácia cez reload, bez chipov aktívnych filtrov</td>
+<td>Stály bočný panel: cena od–do, značka s počtami a vyhľadávaním, objem v ml, pohlavie, druh vône (16+ typov s počtami), dostupnosť. AJAX a chipy aktívnych filtrov</td>
+</tr>
+<tr>
+<td>Radenie</td>
+<td>Dva selecty: Najnovšie / Podľa názvu / Podľa ceny + Vzostupne / Zostupne</td>
+<td>Jeden select: Najrelevantnejšie, Najpredávanejšie, Od najlacnejších, Od najdrahších</td>
+</tr>
+<tr>
+<td>Orientácia</td>
+<td>Banner kategórie (~300 px) tlačí produkty pod záhyb a na mobile zaberá celú prvú obrazovku. Na banneri „Parfémy muži“ je Chanel Coco a YSL Libre, na „Parfémy ženy“ Sauvage. Stránkovanie 24 / strana</td>
+<td>Breadcrumb, podkategórie a počet „171 z 380 produktov“. Produkty sa pri načítaní objavujú animáciou</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lepšie: <strong>Belluria</strong> pri kartách (rýchle pridanie, čistota), <strong>Christel</strong> pri filtroch a radení.</p>
+<p><img alt="Belluria: filtre v zásuvke z ľavej strany" src="img/belluria-filtre-zasuvka.jpg" /></p>
+<p>Belluria, /parfemy-muzi/: filtre v zásuvke z ľavej strany, cena iba ako 4 pásma.</p>
+<p><img alt="Christel: filter ceny 0–50 € s chipom" src="img/christel-filter-cena.jpg" /></p>
+<p>Christel, Pánske parfumy: presná cena, „171 z 380 produktov“ a chip aktívneho filtra.</p>
+<h3>D. Produktový detail (PDP), Dior Sauvage EdP</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Belluria</th>
+<th>Christel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fotka</td>
+<td>Veľká, ale vodoznak „Belluria“ cez stred produktu</td>
+<td>Čistý packshot, iba 1 fotka</td>
+</tr>
+<tr>
+<td>Cena, varianty</td>
+<td>Dlaždice s cenou pre každý objem aj testery, sady ako samostatná skupina. Cena 93.00 € s bodkou</td>
+<td>Cena + jednotková cena (155,00 €/100 ml). Malé dlaždice, ikona dodávky prekrýva text</td>
+</tr>
+<tr>
+<td>CTA</td>
+<td>Pod záhybom na desktope, na mobile až po ~2 obrazovkách. Sticky CTA chýba. Popis je v boxe s vlastným scrollom</td>
+<td>Nad záhybom. Sticky lišta s výberom objemu, množstvom a CTA</td>
+</tr>
+<tr>
+<td>Dostupnosť, doručenie</td>
+<td>„Na sklade“. „Doprava a platba podľa vášho výberu v košíku“, bez ceny a dátumu</td>
+<td>„Skladom“, „U vás doma už v utorok 17. 11. – v stredu 18. 11.“, osobný odber zajtra</td>
+</tr>
+<tr>
+<td>Info o vôni</td>
+<td>Pyramída s časmi a klikateľnými tónmi, ktoré vedú na 0 alebo málo výsledkov. „Charakter vône“ = 4× „Neuvedené“. FAQ odkazuje „vyššie“ na prázdne polia</td>
+<td>Editoriálny popis (rok, parfumér, použitie), tabuľka pyramídy, druh vône, koncentrácia</td>
+</tr>
+<tr>
+<td>Recenzie</td>
+<td>Nie</td>
+<td>Nie</td>
+</tr>
+<tr>
+<td>Cross-sell</td>
+<td>„Mohlo by vás zaujímať“: Jimmy Choo Fever a Moschino I Love Love (dámske) pri pánskom Sauvage</td>
+<td>„Podobné produkty“: Sauvage Parfum, Elixir, Eau Forte, Eau Sauvage. Sada v „Súvisiace“</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lepšie: <strong>Christel</strong>, jasne.</p>
+<p><img alt="Belluria: PDP Sauvage EdP nad záhybom" src="img/belluria-pdp-nad-zahybom.jpg" /></p>
+<p>Belluria, PDP nad záhybom (1568 × 705): vodoznak cez produkt, popis v boxe so scrollom, cena ani CTA nie sú vidieť.</p>
+<p><img alt="Christel: PDP Sauvage EdP nad záhybom" src="img/christel-pdp-nad-zahybom.jpg" /></p>
+<p>Christel, rovnaký výrez: cena, jednotková cena, varianty, dostupnosť, CTA a dátum doručenia.</p>
+<h3>E. Košík (checkout vylúčený)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Belluria</th>
+<th>Christel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Po pridaní</td>
+<td>Zásuvka „Pridané do košíka“, obsah, suma, „Prejsť do košíka“ / „Pokračovať v nákupe“</td>
+<td>Zásuvka s „Máte nárok na bezplatnú dopravu“, úprava množstva, upsell, dátum doručenia. Dve rovnako výrazné CTA „Do košíka“ a „K pokladni“</td>
+</tr>
+<tr>
+<td>Množstvo, odstránenie</td>
+<td>Select 0–10 ks, odkaz Odstrániť</td>
+<td>Stepper +/−, Odstrániť</td>
+</tr>
+<tr>
+<td>Doprava</td>
+<td>„Vyberiete v pokladni“, bez ceny aj bez hranice zdarma</td>
+<td>Progress bar „Máte nárok na bezplatnú dopravu“</td>
+</tr>
+<tr>
+<td>Zľavový kód</td>
+<td>Viditeľné pole hore v súhrne</td>
+<td>Zbalené „Pridajte zľavový kód“</td>
+</tr>
+<tr>
+<td>Darček</td>
+<td>Výber darčeka (Vialky z mixu, Pero) vyžaduje samostatné „Uložiť výber“</td>
+<td>–</td>
+</tr>
+<tr>
+<td>Chyby</td>
+<td>„1 produktov“, „2 produktov“, desatinná bodka</td>
+<td>„93,00 EUR €“, šablónový blok „You may also like“ so 4× „Príklad názvu produktu 19,99 €“, hlavička stĺpca „cena“ malým</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lepšie: <strong>Christel</strong> v toku, <strong>Belluria</strong> v dôveryhodnosti obsahu. Po oprave šablóny je Christel jasne lepší.</p>
+<h3>F. Vyhľadávanie a objavovanie</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Belluria</th>
+<th>Christel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autocomplete</td>
+<td>Na šírku stránky: Tóny, Značky, Produkty s fotkou a cenou, zvýraznený dotaz</td>
+<td>Zásuvka vpravo. Pred písaním „Najhľadanejšie výrazy“ a produkty. Potom iba produkty</td>
+</tr>
+<tr>
+<td>Preklepy</td>
+<td>„sauvge“ a „chanell“ ponúknu „Mysleli ste …?“</td>
+<td>Opravené potichu, výsledky sú správne</td>
+</tr>
+<tr>
+<td>Relevancia</td>
+<td>„dior“: 40 výsledkov, prvé je Diorissimo, nie Sauvage</td>
+<td>„dior“: 60. „sauvage eau de parfum“ po Enter: 659, teda príliš široko</td>
+</tr>
+<tr>
+<td>Sémantika</td>
+<td>„vanilka“ nájde 1 produkt s názvom „Vanilla“</td>
+<td>„vanilka“ nájde parfémy s vanilkou. „baccarat“ ponúkne aj alternatívy</td>
+</tr>
+<tr>
+<td>Prázdny výsledok</td>
+<td>Generický text kategórie + „Zobraziť všetky produkty“</td>
+<td>Slepá ulička: iba text, žiadne produkty ani CTA</td>
+</tr>
+<tr>
+<td>Pomoc pri výbere</td>
+<td>Sprievodca (3 otázky). Chýba v ňom pohlavie, najnižší rozpočet je „Do 100 €“ a výsledkom je 479 nezoradených parfémov</td>
+<td>Články (darček, výdrž, pyramída) a filter Druh vône</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lepšie: <strong>Belluria</strong> v autocomplete a navigácii značiek, <strong>Christel</strong> vo výsledkoch a sémantike.</p>
+<h2>Najväčšie UX problémy Belluria.sk</h2>
+<p>Najväčší problém je nefunkčné objavovanie podľa tónov: menu aj PDP sľubujú funkciu, ktorá vráti prázdnu stránku. Dopad na konverzie je hypotéza odvodená z UX princípov, nie meranie.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problém a lokalita</th>
+<th>Prečo je to problém</th>
+<th>Možný dopad</th>
+<th>Riešenie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Tóny vo VÔNE a v pyramíde na PDP vedú na 0 produktov.</strong> Menu VÔNE → Bergamot (/produkty/bergamot/) = 0. Rovnako Pomaranč, Mandarinka, Grapefruit, Levanduľa, Kosatec, Fialka, Pivonka, Céder, Kadidlo, Tonka, Pralinka, Karamel a Pižmo, spolu 14 z 24. Vanilka = 1 produkt (My Way Sunny Vanilla), hoci vanilku má v základe aj Sauvage EdP</td>
+<td>Stránka tónu je fulltext v názve, nie dáta z pyramídy. PDP píše „Kliknite na tón a zobrazíte všetky vône, ktoré ho obsahujú“, čo nesedí. Porušuje to information scent a heuristiku zhody systému s realitou</td>
+<td>Slepá ulička v jedinom unikátnom objavovacom kanáli a strata dôvery</td>
+<td>Stránky tónov plniť z atribútov pyramídy (hlava, srdce, základ). Tóny s menej ako X produktmi v menu skryť</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Nákupný box na PDP je pod záhybom a chýba sticky CTA.</strong> Desktop: cena a „Do košíka“ až po scrolle. Mobil: po ~2 obrazovkách. Krátky popis je v boxe s vlastným scrollom</td>
+<td>Kľúčová akcia nie je vidieť (Fitts, Baymard: buy box above the fold). Vnorený scroll na mobile zachytáva gesto</td>
+<td>Nižšia miera pridania do košíka, hlavne na mobile</td>
+<td>Cenu a CTA dať hneď pod názov a varianty, popis skrátiť na 2 riadky a „Čítať viac“. Pridať sticky lištu s objemom a CTA</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>„Charakter vône“ = 4× „Neuvedené“ a cyklické FAQ.</strong> Na Sauvage EdP sú výdrž, stopa, obdobie aj príležitosť prázdne. FAQ „Ako dlho vydrží?“ odkazuje „vyššie“</td>
+<td>Prázdne polia pôsobia ako nedokončený web. Práve tieto informácie zákazník pri parfémoch hľadá</td>
+<td>Nižšia dôvera a otázky na podporu</td>
+<td>Prázdne polia nezobrazovať. FAQ generovať iba z vyplnených dát</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Slabé filtre na PLP.</strong> Zásuvka z ľavej strany, tlačidlo vpravo. Iba značka, 4 pevné cenové pásma a príznaky. Chýba druh vône (hoci HP ho používa), dostupnosť, objem a koncentrácia. Bez chipov aktívnych filtrov a počtov. Radenie cez 2 selecty bez „Najpredávanejšie“</td>
+<td>„Do 50 €“ sa nedá zadať. Používateľ nevidí, čo má aktívne (viditeľnosť stavu, NN/g #1). 2 selecty na jedno radenie zvyšujú kognitívnu záťaž</td>
+<td>Viac odchodov z kategórií</td>
+<td>Viď odporúčanie R5</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Vodoznak „Belluria“ cez stred produktu</strong> na PDP aj na časti kariet</td>
+<td>Zakrýva etiketu a pôsobí menej prémiovo. Zákazník nevidí produkt čisto</td>
+<td>Nižšia dôvera v originálnosť</td>
+<td>Vodoznak odstrániť, prípadne iba jemne do rohu</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Nejasná doprava.</strong> Lišta „Luxusné parfémy s doručením do 24 hodín“, ale stránka Doprava uvádza „najneskôr do 2 pracovných dní od expedovania“ a iba kuriéra 4,90 €. HP pritom sľubuje aj vyzdvihnutie. Na PDP aj v košíku chýba cena aj dátum</td>
+<td>Neočakávané náklady sú podľa Baymardu najčastejší dôvod opustenia košíka. Rozporný sľub znižuje dôveru</td>
+<td>Opustenie košíka</td>
+<td>Na PDP a v košíku ukázať dátum doručenia, cenu dopravy a možnosti. Zjednotiť sľub</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Banner kategórie</strong> (~300 px) s nesprávnymi produktmi: Chanel Coco a YSL Libre na „Parfémy muži“, Sauvage na „Parfémy ženy“. Na mobile zaberá celú prvú obrazovku</td>
+<td>Odsúva produkty, a teda hlavný obsah. Zlé obrázky mätú</td>
+<td>Pomalší začiatok prehliadania</td>
+<td>Banner zmenšiť na nadpis + 1 riadok a použiť správne obrázky</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Nesúvisiaci cross-sell</strong> „Mohlo by vás zaujímať“: pri pánskom Sauvage sú dámske vône (Jimmy Choo Fever, Moschino I Love Love)</td>
+<td>Odporúčania bez logiky strácajú dôveru aj klik</td>
+<td>Nižší cross-sell</td>
+<td>Odporúčať podľa pohlavia, rodiny vône a rovnakej línie</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Bestsellery sú skryté.</strong> Na HP ani v menu nie sú, iba ako príznak v zásuvke filtrov</td>
+<td>Sociálny dôkaz je pri parfémoch silná skratka rozhodovania</td>
+<td>Dlhšie rozhodovanie</td>
+<td>HP sekcia, položka v menu a radenie</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Taxonómia a značky.</strong> Rozbalené menu Značky ukáže iba A–L (bez Dior, Chanel, Versace). Duplicity: Dezodoranty/Deodoranty, „Karl Lagerfeld“ aj „Lagerfeld“</td>
+<td>Najznámejšie značky nie sú vidieť. Duplicity mätú (Hickov zákon)</td>
+<td>Pomalšia navigácia</td>
+<td>Ukázať top značky podľa predaja + „Všetky značky A–Z“. Zlúčiť duplicity</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Sprievodca výberom</strong> nemá otázku na pohlavie, najnižší rozpočet je „Do 100 €“ a výsledok je iba sekcia HP so 479 parfémami. Odpoveď na 1. otázku sa vo výsledku neprejaví</td>
+<td>Sľub personalizácie sa nesplní</td>
+<td>Využitie bez konverzie</td>
+<td>Viď R10</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Mikrotext a formáty.</strong> „1 produktov“, „2 produktov“. Ceny s bodkou (93.00 €) v PLP, PDP aj košíku. Titulok „Vyhľadávanie: „Vanilka“ – Vanilka“</td>
+<td>Drobné, ale opakované signály nekvality</td>
+<td>Dôvera</td>
+<td>Slovenské tvary čísla, desatinná čiarka</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Prázdny výsledok vyhľadávania</strong> zobrazí generický text kategórie a jedno CTA</td>
+<td>Zákazník nedostane žiadnu pomoc</td>
+<td>Odchod</td>
+<td>Návrhy, bestsellery, kontakt</td>
+</tr>
+</tbody>
+</table></div>
+<p><img alt="Belluria: tón Bergamot vráti 0 produktov" src="img/belluria-ton-bergamot-0.jpg" /></p>
+<p>Problém 1: VÔNE → Bergamot, „0 produktov“.</p>
+<p><img alt="Belluria: Charakter vône Neuvedené" src="img/belluria-pdp-neuvedene.jpg" /></p>
+<p>Problém 3: „Charakter vône“ na Sauvage EdP, 4× „Neuvedené“.</p>
+<h2>Najväčšie UX problémy Christel.sk</h2>
+<p>Najväčšie problémy Christel sú nedokončené šablónové prvky v košíku a plytká navigácia mimo pohlavia. Vypredané produkty a oznam o úpravách sú vylúčené.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problém a lokalita</th>
+<th>Prečo je to problém</th>
+<th>Možný dopad</th>
+<th>Riešenie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Šablónové produkty v košíku.</strong> /cart: blok „You may also like“ (po anglicky) so 4× „Príklad názvu produktu 19,99 €“ a ikonou batohu</td>
+<td>V najcitlivejšom bode nákupu pôsobí web nedokončene</td>
+<td>Strata dôvery tesne pred platbou</td>
+<td>Blok napojiť na odporúčania (Shopify recommendations) alebo vypnúť</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>„93,00 EUR €“</strong> v zásuvke aj na stránke košíka</td>
+<td>Zdvojená mena pri celkovej sume</td>
+<td>Drobná strata dôvery</td>
+<td>Opraviť formát meny v téme (money_with_currency_format)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Navigácia iba podľa pohlavia.</strong> Akcie, darčekové sady, značky ani bestsellery nie sú na prvej úrovni. Index značiek A–Z chýba, v menu je 6 top značiek. Akcie sú iba v pätičke</td>
+<td>Zákazník s cieľom „akcia“ alebo „značka X“ nemá priamu cestu (information scent)</td>
+<td>Odchod lovcov zliav a fanúšikov značiek</td>
+<td>Pridať do hlavičky Značky (A–Z), Akcie a Darčeky</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Prázdny mega panel.</strong> Pri prvom hoveri na „Dámske parfumy“ sa na chvíľu zobrazí veľký biely panel bez obsahu, obsah sa dočíta až potom</td>
+<td>Pôsobí ako chyba. Používateľ môže odísť myšou skôr, než sa obsah objaví</td>
+<td>Nižšie využitie menu</td>
+<td>Predrenderovať obsah menu alebo zobraziť kostru (skeleton)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Hero „Vybrať vianočný darček“ vedie na všetky parfumy</strong> (/collections/parfumy), nie na darčeky ani sady</td>
+<td>Klik nesplní sľub tlačidla (information scent)</td>
+<td>Najviditeľnejší sezónny vstup sa mrhá</td>
+<td>Viesť na darčekové sady alebo darčekový výber podľa príjemcu a rozpočtu</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>„Doprava zadarmo“ takmer na každej karte, hranica nie je nikde uvedená</strong> (stránka doručenia ani FAQ ju nemajú)</td>
+<td>Odznak na všetkom stráca informačnú hodnotu. Zákazník nevie, od akej sumy doprava zdarma platí</td>
+<td>Prekvapenie v košíku</td>
+<td>Hranicu uviesť v lište, na PDP aj na stránke doručenia. Odznak dať iba tam, kde niečo rozlišuje</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Karty bez rýchleho pridania a preplnené odznakmi</strong> (až 4 na karte)</td>
+<td>Každý nákup vyžaduje návštevu PDP. Vizuálny šum (kognitívna záťaž)</td>
+<td>Pomalší nákup opakovaných zákazníkov</td>
+<td>Rýchle pridanie pri produktoch s 1 variantom, najviac 2 odznaky</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Prázdny výsledok vyhľadávania je slepá ulička</strong> a plné vyhľadávanie je príliš široké („sauvage eau de parfum“ = 659 výsledkov)</td>
+<td>Nulový výsledok bez cesty ďalej. Pri širokom dotaze výsledky zahlcujú</td>
+<td>Odchod</td>
+<td>Návrhy, bestsellery a kategórie pri nule. Pri viacslovnom dotaze uprednostniť zhodu všetkých slov</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Hlavička sa pri scrollovaní skrýva a vyhľadávanie je iba ikona</strong></td>
+<td>Vyhľadávanie je hlavná cesta pri známom produkte (recognition over recall)</td>
+<td>Pomalší prístup k vyhľadávaniu</td>
+<td>Viditeľné pole na desktope, hlavičku nechať sticky</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Wishlist chýba</strong></td>
+<td>Parfémy sa vyberajú dlho a porovnávajú. Bez odloženia sa zákazník stráca</td>
+<td>Nižší návrat</td>
+<td>Wishlist v hlavičke aj na kartách</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>PDP: iba 1 fotka a malé dlaždice variantov</strong>, ikona dodávky prekrýva text objemu. Na mobile majú dlaždice ~70 × 45 px</td>
+<td>Fittsov zákon: malé ciele, chybné ťuknutia</td>
+<td>Chyba vo výbere objemu</td>
+<td>Väčšie dlaždice bez prekrytia. Doplniť fotku krabičky a detailu</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Nekonzistentný obsah.</strong> „parfumy“ v hlavičke a „parfémy“ v pätičke, „Parfum pre ženy 100 m“ (Divine Elixir), Sauvage v Novinkách, voda po holení Boss Bottled medzi bestsellermi</td>
+<td>Drobné, ale opakované signály nekvality</td>
+<td>Dôvera</td>
+<td>Redakčná kontrola a pravidlá pre Novinky</td>
+</tr>
+</tbody>
+</table></div>
+<p><img alt="Christel: šablónový blok v košíku" src="img/christel-kosik-sablona.jpg" /></p>
+<p>Problém 1 a 2: /cart, „93,00 EUR €“ a „You may also like“ so šablónovými produktmi.</p>
+<h2>Najlepšie UX riešenia z oboch e-shopov</h2>
+<p>Z Christel sa oplácá prevziať hlavne nákupný box na PDP a filtre. Z Belluria by mal Christel prevziať vyhľadávanie a index značiek.</p>
+<p><strong>Z Christel.sk do Belluria.sk</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Riešenie</th>
+<th>Kde na Christel</th>
+<th>Prečo funguje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sticky lišta s objemom, množstvom a CTA</td>
+<td>PDP pri scrollovaní</td>
+<td>CTA je stále na dosah, aj po čítaní popisu</td>
+</tr>
+<tr>
+<td>Dátum doručenia + osobný odber na PDP a v košíku</td>
+<td>Pod CTA</td>
+<td>Odpovedá na otázku „kedy to bude doma“ v momente rozhodnutia</td>
+</tr>
+<tr>
+<td>Jednotková cena (€/100 ml)</td>
+<td>Pod cenou na PDP</td>
+<td>Uľahčuje porovnanie objemov</td>
+</tr>
+<tr>
+<td>Bočné filtre s počtami, druh vône, dostupnosť, objem a presná cena, chipy aktívnych filtrov</td>
+<td>PLP a výsledky vyhľadávania</td>
+<td>Rieši scenáre 2, 3, 9 a 11 za 1–2 kliky</td>
+</tr>
+<tr>
+<td>Jedno radenie s „Najpredávanejšie“</td>
+<td>PLP</td>
+<td>Menej rozhodnutí</td>
+</tr>
+<tr>
+<td>Bestseller sekcie a odkazy v menu</td>
+<td>HP, mega menu, pätička</td>
+<td>Sociálny dôkaz a rýchly štart</td>
+</tr>
+<tr>
+<td>Sémantické vyhľadávanie (tóny, alternatívy)</td>
+<td>„vanilka“, „baccarat“</td>
+<td>Nájde vône podľa obsahu, nielen podľa názvu</td>
+</tr>
+<tr>
+<td>Doprava zdarma, upsell a zbalený zľavový kód v košíku</td>
+<td>Zásuvka košíka</td>
+<td>Motivuje k nákupu a neodvádza k hľadaniu kódov</td>
+</tr>
+<tr>
+<td>Editoriálny popis (parfumér, rok, použitie)</td>
+<td>PDP</td>
+<td>Podklad pre rozhodnutie aj pre SEO</td>
+</tr>
+<tr>
+<td>„Podobné produkty“ z rovnakej línie</td>
+<td>PDP</td>
+<td>Relevantné odporúčania</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Z Belluria.sk, čo si nechať a čo by mal prevziať Christel</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Riešenie</th>
+<th>Kde na Belluria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Viditeľné pole vyhľadávania s návrhmi tónov a značiek a „Mysleli ste …?“</td>
+<td>Hlavička a hero HP</td>
+</tr>
+<tr>
+<td>Index značiek A–Z s abecedou</td>
+<td>/znacky/</td>
+</tr>
+<tr>
+<td>Akcie a Novinky dostupné z menu</td>
+<td>Mega menu Parfémy, HP</td>
+</tr>
+<tr>
+<td>Rýchle pridanie do košíka na karte</td>
+<td>PLP</td>
+</tr>
+<tr>
+<td>Wishlist a „Moja história“</td>
+<td>Hlavička</td>
+</tr>
+<tr>
+<td>Koncept sprievodcu a vizuálnej pyramídy s časmi (po oprave dát)</td>
+<td>HP, PDP</td>
+</tr>
+<tr>
+<td>Cenové chipy „Do 30 / 50 / 100 / 200 €“</td>
+<td>HP</td>
+</tr>
+<tr>
+<td>Darček zadarmo k objednávke</td>
+<td>Košík, USP</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Odporúčania pre Belluria.sk a prioritizácia</h2>
+<p><strong>Začať R4, R1 a R2:</strong> R4 je rýchla výhra, R1 a R2 opravujú najväčšie prekážky k nákupu. Prioritu určuje odhadovaný CRO dopad (P1 kritické, P2 významné, P3 menšie), náročnosť je odhad (low / medium / high). Prínos je hypotéza na overenie A/B testom alebo analytikou.</p>
+<p><img alt="Prioritizácia: priorita × náročnosť" src="img/prioritizacia-2x2.png" /></p>
+<p>Ľavý horný roh je poradie práce: najprv R4, potom P1 so strednou náročnosťou (R1, R2, R3, R6) a súbežne rýchle P2 (R7, R8, R11). R5 je najväčší projekt, ale filtre ovplyvňujú väčšinu scenárov.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Priorita</th>
+<th>Aktuálny stav</th>
+<th>Navrhovaná zmena</th>
+<th>Očakávaný prínos</th>
+<th>Náročnosť</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>P1</td>
+<td>14 z 24 tónov v menu VÔNE aj klikateľné tóny na PDP vrátia 0 produktov (fulltext v názve)</td>
+<td>Stránky tónov plniť z dát pyramídy. Tóny s málo produktmi skryť. Na stránku tónu pridať filtre pohlavia a ceny</td>
+<td>Funkčný unikátny kanál objavovania, menej slepých ulíc</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>P1</td>
+<td>Cena a CTA na PDP sú pod záhybom (na mobile po ~2 obrazovkách), popis v boxe s vlastným scrollom, sticky CTA chýba</td>
+<td>Poradie: názov → cena → varianty → dostupnosť a doručenie → CTA, potom popis. Popis 2 riadky + „Čítať viac“. Sticky lišta (objem, cena, CTA) na desktope aj mobile</td>
+<td>Vyššia miera pridania do košíka, hlavne na mobile</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>P1</td>
+<td>Žiadna cena ani dátum doručenia na PDP a v košíku. Lišta „do 24 hodín“ sa rozchádza so stránkou „do 2 pracovných dní“</td>
+<td>Pod CTA: „U vás doma v [deň]“, cena dopravy (Packeta, kuriér) a osobný odber. V košíku cena dopravy alebo hranica zdarma. Zjednotiť sľub v lište a na stránke</td>
+<td>Menej opustených košíkov z neočakávaných nákladov, vyššia dôvera</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>P1</td>
+<td>„Charakter vône“ = 4× „Neuvedené“, FAQ odkazuje na prázdne dáta</td>
+<td>Prázdne polia a FAQ nezobrazovať. Postupne doplniť výdrž a príležitosť pri top 100 produktoch</td>
+<td>Web nepôsobí nedokončene, odpovedá na kľúčové otázky</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R5</td>
+<td>P1</td>
+<td>Filtre v zásuvke: značka, 4 cenové pásma, príznaky. Bez chipov a počtov. Radenie cez 2 selecty</td>
+<td>Desktop: bočný panel (mobil: zásuvka sprava). Filtre: cena od–do, značka, druh vône, koncentrácia, objem, dostupnosť, akcia, tester. Počty pri hodnotách, AJAX, chipy aktívnych filtrov. Jedno radenie: Odporúčané, Najpredávanejšie, Od najlacnejších, Od najdrahších, Najnovšie</td>
+<td>Rýchlejšie zúženie výberu, menej odchodov z kategórií</td>
+<td>high</td>
+</tr>
+<tr>
+<td>R6</td>
+<td>P1</td>
+<td>Vodoznak „Belluria“ cez stred produktu</td>
+<td>Fotky bez vodoznaku (alebo iba malý v rohu), aspoň na PDP a kartách</td>
+<td>Prémiovejší dojem, čitateľná etiketa</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R7</td>
+<td>P2</td>
+<td>Bestsellery iba ako skrytý príznak vo filtroch</td>
+<td>Sekcia na HP, „Najpredávanejšie“ v menu podľa pohlavia, radenie</td>
+<td>Sociálny dôkaz, rýchlejšie rozhodnutie</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R8</td>
+<td>P2</td>
+<td>Banner kategórie ~300 px, na mobile celá obrazovka, nesprávne produkty na obrázku</td>
+<td>Kompaktný nadpis + 1 riadok, prvé produkty viditeľné bez scrollu</td>
+<td>Rýchlejší začiatok prehliadania</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R9</td>
+<td>P2</td>
+<td>Cross-sell „Mohlo by vás zaujímať“ nesúvisí s produktom (dámske pri pánskom)</td>
+<td>Podobné podľa pohlavia, rodiny vône, tónov a línie. Sady k produktu</td>
+<td>Vyšší klik a cross-sell</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R10</td>
+<td>P2</td>
+<td>Sprievodca bez pohlavia, rozpočet od 100 €, výsledok 479 parfémov v sekcii HP</td>
+<td>Otázky: pre koho, príležitosť, rodina vône, rozpočet (od 30 €). Výsledok na vlastnej URL: top 6–12 so zdôvodnením „prečo sedí“. Použiť aj v hero darčekov</td>
+<td>Funkčná pomoc pri výbere a darčekoch</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R11</td>
+<td>P2</td>
+<td>Menu Značky ukáže A–L, duplicity Karl Lagerfeld/Lagerfeld a Dezodoranty/Deodoranty</td>
+<td>Top 15 značiek podľa predaja + odkaz A–Z. Zlúčiť duplicitné značky a kategórie</td>
+<td>Rýchlejšia navigácia, menej zmätku</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R12</td>
+<td>P2</td>
+<td>Dotaz „dior“ dá navrch Diorissimo, prázdny výsledok je generický, chýba sémantika</td>
+<td>Boost bestsellerov a presnej zhody značky (prípadne presmerovanie na stránku značky). Pri nule: návrhy, bestsellery, kontakt. Synonymá a tóny</td>
+<td>Viac úspešných vyhľadávaní</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R13</td>
+<td>P2</td>
+<td>Košík bez ceny dopravy. Výber darčeka vyžaduje „Uložiť výber“, množstvo je select 0–10, zľavové pole je otvorené</td>
+<td>Progress bar dopravy zdarma, darček uložiť hneď po kliku, stepper +/−, zľavový kód zbaliť, upsell (vzorky, sady)</td>
+<td>Vyššia hodnota košíka, menej trenia</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>R14</td>
+<td>P3</td>
+<td>„1 produktov“, ceny s bodkou (93.00 €), titulok „Vyhľadávanie: „Vanilka“ – Vanilka“</td>
+<td>Slovenské tvary (1 produkt, 2–4 produkty, 5+ produktov), desatinná čiarka (93,00 €)</td>
+<td>Profesionálny dojem</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R15</td>
+<td>P3</td>
+<td>Dostupnosť iba na PDP, testery bez rozlíšenia vo výpise</td>
+<td>Stav skladu na karte, odznak „Tester“ a filter</td>
+<td>Rýchlejšie rozhodnutie</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R16</td>
+<td>P3</td>
+<td>Chýba jednotková cena</td>
+<td>€/100 ml pod cenou na PDP a pri variantoch</td>
+<td>Jednoduchšie porovnanie objemov</td>
+<td>low</td>
+</tr>
+<tr>
+<td>R17</td>
+<td>P3</td>
+<td>Recenzie nemá ani jeden e-shop</td>
+<td>Overené recenzie po nákupe (e-mail), hodnotenie výdrže a stopy od zákazníkov</td>
+<td>Sociálny dôkaz a dáta pre „Charakter vône“</td>
+<td>high</td>
+</tr>
+</tbody>
+</table></div>
+</main></body></html>
